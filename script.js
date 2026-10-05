@@ -1,11 +1,11 @@
-// --- BASE DE DADOS DE IMAGENS POR SEXO ---
+// --- BASE DE DADOS DE IMAGENS POR SEXO (ATUALIZADA) ---
 const AVATAR_IMAGES = {
-    Masculino: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=800&q=80",
-    Feminino: "https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=800&q=80",
+    Masculino: "https://www.esafety.gov.au/sites/default/files/2023-01/esafety-online-streaming_thumb.jpg",
+    Feminino: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgxXQILc3wjjftJ6d8NhS93fypBisSWcSd25omE6jME68VKzGeXT_Qyvg&s=10",
     Outro: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80"
 };
 
-// --- DICIONÁRIO MULTI-IDIOMA (PT / EN) ---
+// --- DICIONÁRIO MULTI-IDIOMA COMPLETO (PT / EN) ---
 const i18n = {
     pt: {
         liveBadge: "● AO VIVO",
@@ -13,11 +13,15 @@ const i18n = {
         totalViews: "Views Acumuladas",
         vps: "Views / Segundo",
         streaming: "🎮 A transmitir:",
-        recTitle: "GRAVAR / LIVE",
+        recTitle: "RECORD / LIVE",
         recSub: "CLICA PARA GERAR VIEWS",
         viralBanner: "🚀 VÍDEO VIRAL! VIEWS 5X (30s)",
         chatHeader: "💬 Chat da Live",
         welcomeChat: "Bem-vindos à live!",
+        interactFansBtn: "💬 Interagir com os Fãs",
+        donationsTitle: "💰 Donativos & Saldo",
+        newsTitle: "📰 Notícias do Streamer",
+        eventsSubtext: "Gasta views para participar em eventos interativos e ganhar bónus de subscritores!",
         toastHeader: "CONQUISTA DESBLOQUEADA!",
         titleUpgrades: "⚡ Equipamentos & Equipas",
         titleAchievements: "🏆 Conquistas",
@@ -30,6 +34,7 @@ const i18n = {
         off: "DESLIGADO",
         level: "Nível",
         buyBtnText: "Comprar",
+        participateText: "🎬 Participar",
         confirmReset: "Queres mesmo reiniciar todo o teu império de streaming?",
         savedAlert: "Jogo guardado com sucesso!",
         ranks: [
@@ -54,53 +59,73 @@ const i18n = {
             { name: '🏆 Organizar Torneio', desc: 'Cria um campeonato em direto!' },
             { name: '🎁 Sorteio de PC Gamer', desc: 'Oferece um setup à comunidade!' }
         ],
-        cutscenes: [
+        eventStories: {
+            collab: [
+                {
+                    npcName: "Streamer Alex", avatar: "🎧", badge: "🤝 COLAB AO VIVO", title: "Live Conjunta com Alex",
+                    dialogue: "Boas! Estamos ao vivo para 50k pessoas em simultâneo! Como queres gerir o arranque da partida?",
+                    choices: [
+                        { text: "🎯 'Vamos jogar focado e mostrar jogadas de alto nível!'", bonusMult: 1.0, feedback: "A comunidade pro adorou a jogada!" },
+                        { text: "😂 'Vamos fazer desafios engraçados e rir muito!'", bonusMult: 1.5, feedback: "O vídeo tornou-se viral em memes!" },
+                        { text: "🔥 'Desafio-te a um duelo direto com castigo!'", bonusMult: 2.0, feedback: "A rivalidade fez o contador de subs explodir!" }
+                    ]
+                },
+                {
+                    npcName: "Gamer Sofia", avatar: "🎮", badge: "🤝 MARATONA CO-OP", title: "Maratona Co-Op",
+                    dialogue: "Chegámos ao nível final do jogo! O chat quer saber qual vai ser a nossa estratégia!",
+                    choices: [
+                        { text: "🛡️ 'Eu protejo a retaguarda enquanto avanças!'", bonusMult: 1.1, feedback: "Trabalho de equipa exemplar louvado pelo chat!" },
+                        { text: "🚀 'Avançar à doida sem olhar para trás!'", bonusMult: 1.7, feedback: "O caos gerou momentos hilariantes na stream!" }
+                    ]
+                }
+            ],
+            con: [
+                {
+                    npcName: "Entrevistador Gaming Con", avatar: "🎙️", badge: "🎟️ ENTREVISTA VIP", title: "Palco Principal da Gaming Con",
+                    dialogue: "Estamos aqui com a nova revelação do streaming! Qual é o segredo por trás do teu sucesso?",
+                    choices: [
+                        { text: "❤️ 'É o apoio diário da minha incrível comunidade.'", bonusMult: 1.2, feedback: "A tua humildade conquistou milhares de fãs!" },
+                        { text: "😎 'É o facto de ser simplesmente o melhor no que faço!'", bonusMult: 1.8, feedback: "A tua confiança gerou enorme falatório!" }
+                    ]
+                }
+            ],
+            tournament: [
+                {
+                    npcName: "Comentador e-Sports", avatar: "🏆", badge: "🎮 TORNEIO NACIONAL", title: "Grande Final do Torneio",
+                    dialogue: "Estamos no momento decisivo! Como queres apresentar esta final para o público?",
+                    choices: [
+                        { text: "⚡ 'Criar hype máximo com música épica!'", bonusMult: 1.6, feedback: "O espetáculo bateu recordes de audiência!" },
+                        { text: "💰 'Duplicar o prémio do vencedor com patrocínios!'", bonusMult: 2.2, feedback: "O torneio virou notícia em jornais de tecnologia!" }
+                    ]
+                }
+            ],
+            giveaway: [
+                {
+                    npcName: "Representante da Marca", avatar: "🎁", badge: "🎉 MEGA SORTEIO", title: "Entrega do PC Gamer",
+                    dialogue: "Chegou a hora de revelar o vencedor! Qual é a dinâmica final que queres aplicar?",
+                    choices: [
+                        { text: "📞 'Ligar em direto para o vencedor surpresa!'", bonusMult: 1.7, feedback: "A emoção do vencedor contagiou o chat!" },
+                        { text: "🧩 'Fazer um jogo de adivinhas para desbloquear!'", bonusMult: 2.5, feedback: "O suspense manteve toda a gente colada ao ecrã!" }
+                    ]
+                }
+            ]
+        },
+        fanStories: [
             {
-                npcName: "Streamer Alex",
-                avatar: "🎧",
-                badge: "🤝 COLAB AO VIVO",
-                title: "Live Conjunta com Alex",
-                dialogue: "Boas! Estamos ao vivo para 50k pessoas em simultâneo! Como queres gerir o arranque desta partida?",
+                npcName: "Fã Subscritor #1", avatar: "💬", badge: "💬 INTERAÇÃO COM O CHAT", title: "Pergunta dos Fãs",
+                dialogue: "Oii! Sou teu fã desde o início! Podes dar um conselho para quem quer começar a fazer streams como tu?",
                 choices: [
-                    { text: "🎯 'Vamos jogar focado e mostrar jogadas de alto nível!'", bonusMult: 1.0, feedback: "A comunidade técnica adorou a gameplay pro!" },
-                    { text: "😂 'Vamos fazer desafios engraçados e rir muito!'", bonusMult: 1.5, feedback: "O vídeo tornou-se viral com os memes do chat!" },
-                    { text: "🔥 'Desafio-te a um duelo direto com castigo para o derrotado!'", bonusMult: 2.0, feedback: "A rivalidade fez o chat explodir em subscritores!" }
+                    { text: "🌟 'Começa com o que tens e sê sempre autêntico!'", bonusSubs: 120, money: 15.0, feedback: "O teu conselho inspirou centenas de novos inscritos!" },
+                    { text: "🎧 'Investe tudo num bom microfone e boa iluminação!'", bonusSubs: 80, money: 25.0, feedback: "Dica valiosa elogiada pela comunidade!" },
+                    { text: "🤖 'Sinceramente? Clica no botão vermelho e não penses muito!'", bonusSubs: 200, money: 10.0, feedback: "A tua resposta descontraída virou meme no chat!" }
                 ]
             },
             {
-                npcName: "Entrevistador Gaming Con",
-                avatar: "🎙️",
-                badge: "🎟️ ENTREVISTA VIP",
-                title: "Palco Principal da Gaming Con",
-                dialogue: "Estamos aqui com a nova revelação do streaming! Qual é o verdadeiro segredo por trás do teu crescimento estrondoso?",
+                npcName: "Moderador do Chat", avatar: "🛡️️", badge: "💬 PERGUNTA DA COMUNIDADE", title: "Escolha de Conteúdo",
+                dialogue: "A comunidade no Discord está a pedir um especial de 24 horas! O que respondemos?",
                 choices: [
-                    { text: "❤️️ 'É a dedicação diária e o carinho por quem me assiste.'", bonusMult: 1.2, feedback: "A tua humildade conquistou milhares de fãs!" },
-                    { text: "😎 'É o facto de ser simplesmente o melhor no que faço!'", bonusMult: 1.8, feedback: "A tua confiança gerou enorme falatório nas redes!" },
-                    { text: "🤪 'Honestamente? Pura sorte e muitos energéticos!'", bonusMult: 1.0, feedback: "A resposta deu origem a novos memes!" }
-                ]
-            },
-            {
-                npcName: "Comentador e-Sports",
-                avatar: "🏆",
-                badge: "🎮 TORNEIO NACIONAL",
-                title: "Grande Final do Torneio",
-                dialogue: "Chegámos ao momento decisivo! Como queres apresentar este evento para a audiência?",
-                choices: [
-                    { text: "📊 'Analisar taticamente as equipas antes do tiro de partida.'", bonusMult: 1.1, feedback: "Ganhares respeito entre o público de e-Sports!" },
-                    { text: "⚡ 'Criar hype máximo com efeitos e música épica!'", bonusMult: 1.6, feedback: "O espetáculo bateu recordes de audiência simultânea!" },
-                    { text: "💰 'Duplicar o prémio do vencedor com patrocínios surpresa!'", bonusMult: 2.2, feedback: "O torneio virou notícia em todos os jornais de tecnologia!" }
-                ]
-            },
-            {
-                npcName: "Representante da Marca",
-                avatar: "🎁",
-                badge: "🎉 MEGA SORTEIO",
-                title: "Entrega do PC Gamer",
-                dialogue: "Chegou a hora de revelar o vencedor do PC Gamer! Qual é a dinâmica final que queres aplicar?",
-                choices: [
-                    { text: "🎲 'Sorteio direto e transparente em tempo real.'", bonusMult: 1.3, feedback: "A comunidade elogiou a tua transparência!" },
-                    { text: "📞 'Ligar em direto para o vencedor surpresa!'", bonusMult: 1.7, feedback: "A emoção do vencedor fez chorar metade do chat!" },
-                    { text: "🧩 'Fazer um jogo de adivinhas para desbloquear o vencedor!'", bonusMult: 2.5, feedback: "O suspense manteve toda a gente colada ao ecrã!" }
+                    { text: "🚀 'Vamos a isso! Preparar os energéticos para as 24h!'", bonusSubs: 350, money: 50.0, feedback: "Hype absoluto! O chat explodiu em subscrições!" },
+                    { text: "🎮 'Preferia fazer uma maratona de 12h focada num jogo novo.'", bonusSubs: 180, money: 30.0, feedback: "A comunidade adorou o plano de maratona!" }
                 ]
             }
         ],
@@ -119,6 +144,14 @@ const i18n = {
         chatMessages: [
             'Manda abraço!', 'QUE JOGADA! 🔥', 'GG!!', 'Subi para patrocinador!', 
             'Melhor live de sempre ❤', 'Hype total!!', 'Qual é o teu setup?', 'LOL fantástico!'
+        ],
+        donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream'],
+        donationMsgs: ['Para o café!', 'Continua o grande trabalho! 🔥', 'Manda um abraço na stream!', 'Top de live!'],
+        newsTemplates: [
+            "📈 O teu canal superou o marco de {subs} inscritos!",
+            "🔥 A tua última stream virou tendência nas redes sociais!",
+            "🎙️ Marcas de tecnologia estão de olho no teu crescimento!",
+            "⭐ Fãs criaram uma página de memes sobre a tua live!"
         ]
     },
     en: {
@@ -132,6 +165,10 @@ const i18n = {
         viralBanner: "🚀 VIRAL VIDEO! VIEWS 5X (30s)",
         chatHeader: "💬 Live Chat",
         welcomeChat: "Welcome to the stream!",
+        interactFansBtn: "💬 Interact with Fans",
+        donationsTitle: "💰 Donations & Balance",
+        newsTitle: "📰 Streamer News",
+        eventsSubtext: "Spend views to participate in interactive events and gain subscriber bonuses!",
         toastHeader: "ACHIEVEMENT UNLOCKED!",
         titleUpgrades: "⚡ Equipment & Staff",
         titleAchievements: "🏆 Achievements",
@@ -144,6 +181,7 @@ const i18n = {
         off: "OFF",
         level: "Level",
         buyBtnText: "Buy",
+        participateText: "🎬 Join",
         confirmReset: "Are you sure you want to reset your streaming empire?",
         savedAlert: "Game saved successfully!",
         ranks: [
@@ -155,7 +193,7 @@ const i18n = {
         ],
         upgrades: [
             { name: '💻 RGB Mechanical Keyboard', desc: '+1 View/click' },
-            { name: '🎙️ Lapel Microphone', desc: '+1 View/sec' },
+            { name: '🎙️️ Lapel Microphone', desc: '+1 View/sec' },
             { name: '💡 Pro Ring Light', desc: '+8 Views/sec' },
             { name: '🎬 Paid Video Editor', desc: '+45 Views/sec' },
             { name: '🪑 Pro Gaming Chair', desc: '+200 Views/sec' },
@@ -168,53 +206,73 @@ const i18n = {
             { name: '🏆 Host Tournament', desc: 'Organize a live cup!' },
             { name: '🎁 PC Gaming Giveaway', desc: 'Give back to your fans!' }
         ],
-        cutscenes: [
+        eventStories: {
+            collab: [
+                {
+                    npcName: "Streamer Alex", avatar: "🎧", badge: "🤝 LIVE COLLAB", title: "Joint Stream with Alex",
+                    dialogue: "Hey! We are live for 50k people right now! How should we kick off this game?",
+                    choices: [
+                        { text: "🎯 'Let's focus and show pro-level gameplay!'", bonusMult: 1.0, feedback: "Pro gamers loved your skills!" },
+                        { text: "😂 'Let's do funny challenges and laugh!'", bonusMult: 1.5, feedback: "The stream clip went viral on social media!" },
+                        { text: "🔥 'I challenge you to a 1v1 duel with punishment!'", bonusMult: 2.0, feedback: "The rivalry exploded the subscriber counter!" }
+                    ]
+                },
+                {
+                    npcName: "Gamer Sofia", avatar: "🎮", badge: "🤝 CO-OP MARATHON", title: "Co-Op Marathon",
+                    dialogue: "We reached the final level of the game! The chat wants to know our strategy!",
+                    choices: [
+                        { text: "🛡️ 'I cover your back while you advance!'", bonusMult: 1.1, feedback: "Exemplary teamwork praised by the chat!" },
+                        { text: "🚀 'Rush blindly without looking back!'", bonusMult: 1.7, feedback: "The chaos generated hilarious moments!" }
+                    ]
+                }
+            ],
+            con: [
+                {
+                    npcName: "Gaming Con Host", avatar: "🎙️", badge: "🎟️ VIP INTERVIEW", title: "Gaming Con Stage",
+                    dialogue: "Here we are with the newest streaming star! What is the secret behind your growth?",
+                    choices: [
+                        { text: "❤️ 'Daily hard work and caring about my community.'", bonusMult: 1.2, feedback: "Your humility won thousands of hearts!" },
+                        { text: "😎 'Honestly? I am simply the best at what I do!'", bonusMult: 1.8, feedback: "Your confidence created huge hype!" }
+                    ]
+                }
+            ],
+            tournament: [
+                {
+                    npcName: "e-Sports Caster", avatar: "🏆", badge: "🎮 TOURNAMENT FINALS", title: "Grand Finals",
+                    dialogue: "Decision time! How do you want to present this final?",
+                    choices: [
+                        { text: "⚡ 'Create maximum hype with epic music!'", bonusMult: 1.6, feedback: "Viewership hit record numbers!" },
+                        { text: "💰 'Double the cash prize with sponsors!'", bonusMult: 2.2, feedback: "The tournament made tech news headlines!" }
+                    ]
+                }
+            ],
+            giveaway: [
+                {
+                    npcName: "Sponsor Rep", avatar: "🎁", badge: "🎉 MEGA GIVEAWAY", title: "PC Giveaway",
+                    dialogue: "Time to announce the winner! How should we do it?",
+                    choices: [
+                        { text: "📞 'Call the winner live on stream!'", bonusMult: 1.7, feedback: "The winner reaction touched everyone!" },
+                        { text: "🧩 'A mini quiz game to unlock the winner!'", bonusMult: 2.5, feedback: "Suspense kept everyone glued to the stream!" }
+                    ]
+                }
+            ]
+        },
+        fanStories: [
             {
-                npcName: "Streamer Alex",
-                avatar: "🎧",
-                badge: "🤝 LIVE COLLAB",
-                title: "Joint Stream with Alex",
-                dialogue: "Hey! We are live for 50k people right now! How should we kick off this game?",
+                npcName: "Fan Subscriber #1", avatar: "💬", badge: "💬 CHAT INTERACTION", title: "Fan Question",
+                dialogue: "Hi! I love your streams! Any advice for someone who wants to start streaming?",
                 choices: [
-                    { text: "🎯 'Let's focus and show pro-level gameplay!'", bonusMult: 1.0, feedback: "Tech fans loved the pro gameplay!" },
-                    { text: "😂 'Let's do funny challenges and laugh!'", bonusMult: 1.5, feedback: "Memes went viral all over Twitter!" },
-                    { text: "🔥 'I challenge you to a 1v1 duel with punishment!'", bonusMult: 2.0, feedback: "The rivalry exploded the subscriber counter!" }
+                    { text: "🌟 'Start with what you have and be authentic!'", bonusSubs: 120, money: 15.0, feedback: "Your advice inspired many new subs!" },
+                    { text: "🎧 'Invest in a good microphone and lighting!'", bonusSubs: 80, money: 25.0, feedback: "Great tip praised by the community!" },
+                    { text: "🤖 'Just press the red button and don't overthink!'", bonusSubs: 200, money: 10.0, feedback: "Your chill answer became a chat meme!" }
                 ]
             },
             {
-                npcName: "Gaming Con Host",
-                avatar: "🎙️",
-                badge: "🎟️ VIP INTERVIEW",
-                title: "Gaming Con Main Stage",
-                dialogue: "Here we are with the newest streaming sensation! What is the real secret behind your fast growth?",
+                npcName: "Chat Moderator", avatar: "🛡️", badge: "💬 COMMUNITY QUESTION", title: "Content Choice",
+                dialogue: "Discord community is asking for a 24h stream special! What should we say?",
                 choices: [
-                    { text: "❤️ 'Daily hard work and caring about my community.'", bonusMult: 1.2, feedback: "Your humility won thousands of hearts!" },
-                    { text: "😎 'Honestly? I am simply the best at what I do!'", bonusMult: 1.8, feedback: "Your confidence created massive hype!" },
-                    { text: "🤪 'Pure luck and way too many energy drinks!'", bonusMult: 1.0, feedback: "Chat turned your quote into a classic meme!" }
-                ]
-            },
-            {
-                npcName: "e-Sports Caster",
-                avatar: "🏆",
-                badge: "🎮 NATIONAL TOURNAMENT",
-                title: "Tournament Grand Finals",
-                dialogue: "We reached the decisive moment! How do you want to present this final?",
-                choices: [
-                    { text: "📊 'Analyze team tactics before starting.'", bonusMult: 1.1, feedback: "You gained huge respect in esports!" },
-                    { text: "⚡ 'Create maximum hype with epic music!'", bonusMult: 1.6, feedback: "Concurrent viewership hit record highs!" },
-                    { text: "💰 'Double the cash prize with surprise sponsors!'", bonusMult: 2.2, feedback: "The tournament made tech news headlines!" }
-                ]
-            },
-            {
-                npcName: "Sponsor Rep",
-                avatar: "🎁",
-                badge: "🎉 MEGA GIVEAWAY",
-                title: "PC Gamer Giveaway",
-                dialogue: "Time to announce the Gaming PC winner! How should we do the reveal?",
-                choices: [
-                    { text: "🎲 'Direct and transparent live roll.'", bonusMult: 1.3, feedback: "Fans applauded your transparency!" },
-                    { text: "📞 'Call the winner live on stream!'", bonusMult: 1.7, feedback: "The winner's reaction made viewers cry!" },
-                    { text: "🧩 'A mini quiz game to unlock the winner!'", bonusMult: 2.5, feedback: "Suspense kept everyone glued to the stream!" }
+                    { text: "🚀 'Let's do it! Get the energy drinks ready!'", bonusSubs: 350, money: 50.0, feedback: "Total hype! Chat exploded with sub renewals!" },
+                    { text: "🎮 'I prefer a 12h marathon focused on a new game.'", bonusSubs: 180, money: 30.0, feedback: "Community loved the marathon plan!" }
                 ]
             }
         ],
@@ -233,6 +291,14 @@ const i18n = {
         chatMessages: [
             'Shoutout please!', 'WHAT A PLAY! 🔥', 'GG!!', 'Just subscribed!', 
             'Best stream ever ❤', 'Total Hype!!', 'What pc specs?', 'LOL awesome!'
+        ],
+        donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream'],
+        donationMsgs: ['Coffee money!', 'Keep up the epic work! 🔥', 'Shoutout on stream please!', 'Best stream!'],
+        newsTemplates: [
+            "📈 Your channel crossed the {subs} subscribers mark!",
+            "🔥 Your latest stream is trending on social media!",
+            "🎙️ Tech sponsors are noticing your fast growth!",
+            "⭐ Fans created a meme page dedicated to your live!"
         ]
     }
 };
@@ -249,6 +315,7 @@ let gameState = {
     plaqueAwarded: false,
     views: 0,
     totalViews: 0,
+    money: 0.00,
     bonusSubscribers: 0,
     viewsPerClick: 1,
     viewsPerSecond: 0,
@@ -318,7 +385,7 @@ function startBgMusic() {
             const gain = audioCtx.createGain();
             osc.type = 'triangle';
             osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.012, audioCtx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
@@ -370,7 +437,6 @@ function updateRankAndAvatar(subs) {
     document.getElementById('webcam-tier').innerText = currentConf.cam;
     document.getElementById('game-title').innerText = `${gameState.userProfile.category || 'Games'} • ${currentConf.game}`;
 
-    // Atualização da foto de acordo com o sexo do jogador
     const gender = gameState.userProfile.gender || 'Masculino';
     const streamImg = document.getElementById('main-stream-img');
     streamImg.src = AVATAR_IMAGES[gender] || AVATAR_IMAGES.Masculino;
@@ -378,9 +444,7 @@ function updateRankAndAvatar(subs) {
     if (rankIndex === 4) unlockAchievement('planet_rank');
 }
 
-// --- CHAT AO VIVO ---
-const chatUsers = ['Pedro_Gamer', 'Clara_YT', 'PixelQueen', 'ProGamer99', 'Nuno_RGC', 'AnaStream', 'Vítor_Vlog'];
-
+// --- CHAT, DONATIVOS & NOTÍCIAS DINÂMICAS ---
 function resetChatForLanguage() {
     const chatContainer = document.getElementById('chat-messages');
     chatContainer.innerHTML = '';
@@ -395,37 +459,57 @@ function addChatMessage(user, text) {
     line.innerHTML = `<span class="chat-user">${user}:</span> ${text}`;
     chatContainer.appendChild(line);
 
-    if (chatContainer.children.length > 12) {
+    if (chatContainer.children.length > 10) {
         chatContainer.removeChild(chatContainer.firstChild);
     }
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
+function triggerRandomDonation() {
+    const t = i18n[gameState.lang];
+    const user = t.donators[Math.floor(Math.random() * t.donators.length)];
+    const msg = t.donationMsgs[Math.floor(Math.random() * t.donationMsgs.length)];
+    const amount = (Math.random() * 20 + 2).toFixed(2);
+
+    gameState.money = (gameState.money || 0) + parseFloat(amount);
+
+    const feed = document.getElementById('donations-feed');
+    if (!feed) return;
+
+    const item = document.createElement('div');
+    item.className = 'donation-item';
+    item.innerHTML = `<span class="donation-user">${user}</span> doou <span class="donation-amount">€${amount}</span>: "${msg}"`;
+    feed.appendChild(item);
+
+    if (feed.children.length > 6) feed.removeChild(feed.firstChild);
+    feed.scrollTop = feed.scrollHeight;
+}
+
+function addNewsItem(text) {
+    const feed = document.getElementById('news-feed');
+    if (!feed) return;
+    const item = document.createElement('div');
+    item.className = 'news-item';
+    item.innerText = text;
+    feed.appendChild(item);
+    if (feed.children.length > 6) feed.removeChild(feed.firstChild);
+    feed.scrollTop = feed.scrollHeight;
+}
+
 setInterval(() => {
-    if (Math.random() < 0.6) {
-        const list = i18n[gameState.lang].chatMessages;
-        const user = chatUsers[Math.floor(Math.random() * chatUsers.length)];
+    const t = i18n[gameState.lang];
+    if (Math.random() < 0.5) {
+        const list = t.chatMessages;
+        const user = t.donators[Math.floor(Math.random() * t.donators.length)];
         const text = list[Math.floor(Math.random() * list.length)];
         addChatMessage(user, text);
     }
-}, 2500);
+    if (Math.random() < 0.25) {
+        triggerRandomDonation();
+    }
+}, 3000);
 
-// --- SISTEMA DE TABS ---
-document.getElementById('tab-events-btn').addEventListener('click', () => {
-    document.getElementById('tab-events-btn').classList.add('active');
-    document.getElementById('tab-achievements-btn').classList.remove('active');
-    document.getElementById('tab-events-content').classList.add('active');
-    document.getElementById('tab-achievements-content').classList.remove('active');
-});
-
-document.getElementById('tab-achievements-btn').addEventListener('click', () => {
-    document.getElementById('tab-achievements-btn').classList.add('active');
-    document.getElementById('tab-events-btn').classList.remove('active');
-    document.getElementById('tab-achievements-content').classList.add('active');
-    document.getElementById('tab-events-content').classList.remove('active');
-});
-
-// --- ATUALIZAÇÃO DA INTERFACE ---
+// --- ATUALIZAÇÃO LEVE DA INTERFACE (SEM DELAY) ---
 function updateUI() {
     const t = i18n[gameState.lang];
 
@@ -439,6 +523,10 @@ function updateUI() {
     document.getElementById('chat-header').innerText = t.chatHeader;
     document.getElementById('toast-header').innerText = t.toastHeader;
     document.getElementById('title-upgrades').innerText = t.titleUpgrades;
+    document.getElementById('interact-fans-btn').innerText = t.interactFansBtn;
+    document.getElementById('label-donations-title').innerText = t.donationsTitle;
+    document.getElementById('label-news-title').innerText = t.newsTitle;
+    document.getElementById('label-events-subtext').innerText = t.eventsSubtext;
     document.getElementById('edit-profile-btn').innerText = t.editProfileBtn;
     document.getElementById('save-btn').innerText = t.saveBtn;
     document.getElementById('reset-btn').innerText = t.resetBtn;
@@ -448,6 +536,7 @@ function updateUI() {
 
     document.getElementById('views-display').innerText = formatNumber(gameState.views);
     document.getElementById('vps-display').innerText = formatNumber(gameState.viewsPerSecond * gameState.multiplier);
+    document.getElementById('balance-display').innerText = `€ ${(gameState.money || 0).toFixed(2)}`;
     
     let baseSubs = Math.floor(Math.sqrt(gameState.totalViews));
     let subs = baseSubs + (gameState.bonusSubscribers || 0);
@@ -459,8 +548,8 @@ function updateUI() {
 
     updateRankAndAvatar(subs);
     checkAchievementsAndPlaque(subs);
-    renderUpgrades();
-    renderEvents();
+    updateUpgradeButtonsState();
+    updateEventButtonsState();
     renderAchievements();
 }
 
@@ -483,9 +572,8 @@ document.getElementById('close-plaque-btn').addEventListener('click', () => {
     document.getElementById('plaque-modal').classList.add('hidden');
 });
 
-// --- BOTÃO DE GERAR VIEWS ---
+// --- BOTÃO RED DE CLIQUE ---
 const clickBtn = document.getElementById('click-btn');
-const clickerContainer = document.getElementById('clicker-container');
 
 clickBtn.addEventListener('click', (e) => {
     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -501,7 +589,7 @@ clickBtn.addEventListener('click', (e) => {
 });
 
 function createFloatText(e, text) {
-    const rect = clickerContainer.getBoundingClientRect();
+    const rect = clickBtn.getBoundingClientRect();
     const floatEl = document.createElement('div');
     floatEl.className = 'float-text';
     floatEl.innerText = text;
@@ -509,47 +597,56 @@ function createFloatText(e, text) {
     let x = e.clientX ? e.clientX - rect.left : rect.width / 2;
     let y = e.clientY ? e.clientY - rect.top : rect.height / 2;
 
-    floatEl.style.left = `${x - 20}px`;
-    floatEl.style.top = `${y - 20}px`;
+    floatEl.style.left = `${rect.left + x - 20}px`;
+    floatEl.style.top = `${rect.top + y - 20}px`;
 
-    clickerContainer.appendChild(floatEl);
+    document.body.appendChild(floatEl);
     setTimeout(() => floatEl.remove(), 800);
 }
 
-// --- RENDER DE MELHORIAS ---
-function renderUpgrades() {
+// --- CONSTRUÇÃO & ATUALIZAÇÃO SEM LAG DOS UPGRADES ---
+function buildUpgradesDOM() {
     const listEl = document.getElementById('upgrades-list');
     listEl.innerHTML = '';
     const t = i18n[gameState.lang];
 
     gameState.upgrades.forEach((up, index) => {
         const upText = t.upgrades[index];
-        const canAfford = gameState.views >= up.cost;
-
         const card = document.createElement('div');
         card.className = 'upgrade-card';
 
         card.innerHTML = `
             <div class="card-header-row">
                 <span class="card-title">${upText.name}</span>
-                <span class="count-tag">${t.level} ${up.count}</span>
+                <span class="count-tag" id="up-count-${index}">${t.level} ${up.count}</span>
             </div>
             <span class="card-desc">${upText.desc}</span>
             <div class="card-footer-row">
-                <span class="cost-tag">👁️ ${formatNumber(up.cost)}</span>
-                <button class="btn-buy-action" ${canAfford ? '' : 'disabled'}>
+                <span class="cost-tag" id="up-cost-${index}">👁️ ${formatNumber(up.cost)}</span>
+                <button class="btn-buy-action" id="up-btn-${index}">
                     ${t.buyBtnText}
                 </button>
             </div>
         `;
 
-        const buyBtn = card.querySelector('.btn-buy-action');
-        buyBtn.onclick = (e) => {
-            e.stopPropagation();
-            buyUpgrade(index);
-        };
-
         listEl.appendChild(card);
+        document.getElementById(`up-btn-${index}`).onclick = () => buyUpgrade(index);
+    });
+}
+
+function updateUpgradeButtonsState() {
+    const t = i18n[gameState.lang];
+    gameState.upgrades.forEach((up, index) => {
+        const btn = document.getElementById(`up-btn-${index}`);
+        const costTag = document.getElementById(`up-cost-${index}`);
+        const countTag = document.getElementById(`up-count-${index}`);
+
+        if (btn) {
+            btn.disabled = gameState.views < up.cost;
+            btn.innerText = t.buyBtnText;
+        }
+        if (costTag) costTag.innerText = `👁️ ${formatNumber(up.cost)}`;
+        if (countTag) countTag.innerText = `${t.level} ${up.count}`;
     });
 }
 
@@ -575,45 +672,54 @@ function recalculateVPS() {
     gameState.viewsPerSecond = gameState.upgrades.reduce((total, up) => total + (up.vps * up.count), 0);
 }
 
-// --- RENDER DE EVENTOS E CUTSCENES INTERATIVAS ---
-function renderEvents() {
+// --- CONSTRUÇÃO E ATUALIZAÇÃO DE EVENTOS & CUTSCENES ---
+function buildEventsDOM() {
     const listEl = document.getElementById('events-list');
     listEl.innerHTML = '';
     const t = i18n[gameState.lang];
 
     gameState.events.forEach((ev, index) => {
         const evText = t.events[index];
-        const canAfford = gameState.views >= ev.cost;
-
         const card = document.createElement('div');
         card.className = 'event-card';
 
         card.innerHTML = `
             <div class="card-header-row">
                 <span class="card-title">${evText.name}</span>
-                <span class="count-tag">x${ev.count}</span>
+                <span class="count-tag" id="ev-count-${index}">x${ev.count}</span>
             </div>
             <span class="card-desc">${evText.desc}</span>
             <span class="event-bonus">💥 Bónus até +${formatNumber(ev.baseSubBonus * 2.5)} Subs</span>
             <div class="card-footer-row">
-                <span class="cost-tag">👁️ ${formatNumber(ev.cost)}</span>
-                <button class="btn-buy-action" ${canAfford ? '' : 'disabled'}>
-                    🎬 Participar
+                <span class="cost-tag" id="ev-cost-${index}">👁️ ${formatNumber(ev.cost)}</span>
+                <button class="btn-buy-action" id="ev-btn-${index}">
+                    ${t.participateText}
                 </button>
             </div>
         `;
 
-        const buyBtn = card.querySelector('.btn-buy-action');
-        buyBtn.onclick = (e) => {
-            e.stopPropagation();
-            launchCutsceneEvent(index);
-        };
-
         listEl.appendChild(card);
+        document.getElementById(`ev-btn-${index}`).onclick = () => launchCutsceneEvent(index);
     });
 }
 
-// LAUNCH CUTSCENE DIALOGUE
+function updateEventButtonsState() {
+    const t = i18n[gameState.lang];
+    gameState.events.forEach((ev, index) => {
+        const btn = document.getElementById(`ev-btn-${index}`);
+        const costTag = document.getElementById(`ev-cost-${index}`);
+        const countTag = document.getElementById(`ev-count-${index}`);
+
+        if (btn) {
+            btn.disabled = gameState.views < ev.cost;
+            btn.innerText = t.participateText;
+        }
+        if (costTag) costTag.innerText = `👁️ ${formatNumber(ev.cost)}`;
+        if (countTag) countTag.innerText = `x${ev.count}`;
+    });
+}
+
+// LANÇAMENTO DE CUTSCENE EVENTO
 function launchCutsceneEvent(index) {
     let ev = gameState.events[index];
     if (gameState.views < ev.cost) return;
@@ -622,7 +728,8 @@ function launchCutsceneEvent(index) {
     ev.count++;
 
     const t = i18n[gameState.lang];
-    const cutData = t.cutscenes[index];
+    const storiesArray = t.eventStories[ev.id] || t.eventStories.collab;
+    const cutData = storiesArray[Math.floor(Math.random() * storiesArray.length)];
 
     const modal = document.getElementById('cutscene-modal');
     document.getElementById('cut-badge').innerText = cutData.badge;
@@ -648,6 +755,7 @@ function launchCutsceneEvent(index) {
             modal.classList.add('hidden');
             playBuySFX();
             showAchievementToast(`+${formatNumber(gainedSubs)} Subs! ${choice.feedback}`);
+            addNewsItem(`💥 ${cutData.title}: +${formatNumber(gainedSubs)} subs!`);
 
             if (index === 0) unlockAchievement('collab_first');
             if (index === 1) unlockAchievement('event_first');
@@ -661,6 +769,45 @@ function launchCutsceneEvent(index) {
 
     modal.classList.remove('hidden');
 }
+
+// INTERAÇÃO DIRETA COM OS FÃS
+document.getElementById('interact-fans-btn').addEventListener('click', () => {
+    const t = i18n[gameState.lang];
+    const fanStories = t.fanStories;
+    const story = fanStories[Math.floor(Math.random() * fanStories.length)];
+
+    const modal = document.getElementById('cutscene-modal');
+    document.getElementById('cut-badge').innerText = story.badge;
+    document.getElementById('cut-title').innerText = story.title;
+    document.getElementById('cut-npc-name').innerText = story.npcName;
+    document.getElementById('cut-npc-avatar').innerText = story.avatar;
+    document.getElementById('cut-dialogue').innerText = `"${story.dialogue}"`;
+
+    const choicesContainer = document.getElementById('cut-choices');
+    choicesContainer.innerHTML = '';
+
+    story.choices.forEach((choice) => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.innerText = choice.text;
+
+        btn.onclick = () => {
+            gameState.bonusSubscribers = (gameState.bonusSubscribers || 0) + choice.bonusSubs;
+            gameState.money = (gameState.money || 0) + choice.money;
+
+            modal.classList.add('hidden');
+            playBuySFX();
+            showAchievementToast(`+${choice.bonusSubs} Subs! ${choice.feedback}`);
+
+            updateUI();
+            saveGame();
+        };
+
+        choicesContainer.appendChild(btn);
+    });
+
+    modal.classList.remove('hidden');
+});
 
 // --- CONQUISTAS ---
 function unlockAchievement(id) {
@@ -708,7 +855,28 @@ function renderAchievements() {
     document.getElementById('achievements-count').innerText = `${unlockedCount}/${gameState.achievements.length}`;
 }
 
-// --- GAME LOOP ---
+// --- EVENTO VIRAL ---
+setInterval(() => {
+    if (!viralEventActive && Math.random() < 0.3) {
+        triggerViralEvent();
+    }
+}, 60000);
+
+function triggerViralEvent() {
+    viralEventActive = true;
+    gameState.multiplier = 5;
+    document.getElementById('event-banner').style.display = 'block';
+    unlockAchievement('viral_event');
+
+    setTimeout(() => {
+        viralEventActive = false;
+        gameState.multiplier = 1;
+        document.getElementById('event-banner').style.display = 'none';
+        updateUI();
+    }, 30000);
+}
+
+// --- GAME LOOP AUTOMÁTICO ---
 setInterval(() => {
     if (gameState.viewsPerSecond > 0) {
         let gained = (gameState.viewsPerSecond / 10) * gameState.multiplier;
@@ -718,16 +886,18 @@ setInterval(() => {
     }
 }, 100);
 
-// --- TROCA DE IDIOMA ---
+// --- SELEÇÃO DE IDIOMA ---
 const langSelect = document.getElementById('lang-select');
 langSelect.addEventListener('change', (e) => {
     gameState.lang = e.target.value;
     resetChatForLanguage();
+    buildUpgradesDOM();
+    buildEventsDOM();
     updateUI();
     saveGame();
 });
 
-// --- SUBMISSÃO DO FORMULÁRIO DE SETUP ---
+// --- SUBMISSÃO DO FORMULÁRIO ---
 const setupModal = document.getElementById('setup-modal');
 const setupForm = document.getElementById('setup-form');
 
@@ -751,13 +921,13 @@ document.getElementById('edit-profile-btn').addEventListener('click', () => {
     setupModal.classList.remove('hidden');
 });
 
-// --- GUARDAR E REINICIAR ---
+// --- SISTEMA DE GUARDAR E CARREGAR ---
 function saveGame() {
-    localStorage.setItem('viral_streamer_v6_save', JSON.stringify(gameState));
+    localStorage.setItem('viral_streamer_v7_save', JSON.stringify(gameState));
 }
 
 function loadGame() {
-    const saved = localStorage.getItem('viral_streamer_v6_save');
+    const saved = localStorage.getItem('viral_streamer_v7_save');
     if (saved) {
         const parsed = JSON.parse(saved);
         gameState = { ...gameState, ...parsed };
@@ -772,6 +942,8 @@ function loadGame() {
 
     langSelect.value = gameState.lang;
     resetChatForLanguage();
+    buildUpgradesDOM();
+    buildEventsDOM();
     updateUI();
 }
 
@@ -782,12 +954,12 @@ document.getElementById('save-btn').addEventListener('click', () => {
 
 document.getElementById('reset-btn').addEventListener('click', () => {
     if (confirm(i18n[gameState.lang].confirmReset)) {
-        localStorage.removeItem('viral_streamer_v6_save');
+        localStorage.removeItem('viral_streamer_v7_save');
         location.reload();
     }
 });
 
-// CONTROLOS DE SOM
+// CONTROLOS DE ÁUDIO
 document.getElementById('sound-btn').addEventListener('click', () => {
     gameState.soundEnabled = !gameState.soundEnabled;
     updateUI();
