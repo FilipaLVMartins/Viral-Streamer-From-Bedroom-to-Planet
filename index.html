@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viral Streamer: From Bedroom to Planet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- MODAL DE SETUP INICIAL DO PERFIL -->
+    <div id="setup-modal" class="modal-overlay">
+        <div class="modal-card">
+            <h2>🎮 Criar Canal de Stream</h2>
+            <p class="modal-subtitle">Configura a tua identidade para começar a transmitir!</p>
+            <form id="setup-form">
+                <div class="form-group">
+                    <label for="input-name">Nome do Streamer / Canal</label>
+                    <input type="text" id="input-name" placeholder="Ex: PedroGamer, ClaraLive..." required maxLength="20">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="input-gender">Sexo do Avatar</label>
+                        <select id="input-gender" required>
+                            <option value="Masculino">Masculino ♂</option>
+                            <option value="Feminino">Feminino ♀</option>
+                            <option value="Outro">Outro ⚧</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-age">Idade</label>
+                        <input type="number" id="input-age" placeholder="Ex: 20" min="10" max="99" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-category">Tipo de Conteúdo</label>
+                    <select id="input-category" required>
+                        <option value="Games">🎮 Games / Jogos</option>
+                        <option value="Vlogs">📹 Vlogs & Dia a Dia</option>
+                        <option value="Tech">💻 Tecnologia & Hardware</option>
+                        <option value="IRL">🎙️ Chat / IRL</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-start">🚀 Iniciar Carreira de Streamer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE INTERAÇÃO / CUTSCENE DE EVENTOS -->
+    <div id="cutscene-modal" class="modal-overlay hidden">
+        <div class="modal-card cutscene-card">
+            <div class="cutscene-header">
+                <span class="cutscene-badge" id="cut-badge">🎬 EVENTO EM DIRETO</span>
+                <h2 id="cut-title">Nome do Evento</h2>
+            </div>
+            
+            <div class="cutscene-body">
+                <div class="npc-box">
+                    <div class="npc-avatar" id="cut-npc-avatar">👤</div>
+                    <div class="npc-info">
+                        <h4 id="cut-npc-name">Nome do Entrevistador / Streamer</h4>
+                        <p class="dialogue-bubble" id="cut-dialogue">"Texto do diálogo vai aparecer aqui..."</p>
+                    </div>
+                </div>
+
+                <div class="choices-container" id="cut-choices">
+                    <!-- Botões de escolha injetados via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DA PLACA DE 1.000 SUBSCRITORES -->
+    <div id="plaque-modal" class="modal-overlay hidden">
+        <div class="modal-card plaque-card">
+            <div class="plaque-frame">
+                <div class="plaque-icon">🏆</div>
+                <div class="plaque-header">APRESENTADO A</div>
+                <div class="plaque-channel-name" id="plaque-user-name">NOME DO CANAL</div>
+                <div class="plaque-desc" id="plaque-category-desc">POR ULTRAPASSAR 1.000 SUBSCRITORES</div>
+                <div class="plaque-logo">YT STREAM AWARDS</div>
+            </div>
+            <h2>🎉 PARABÉNS! GANHASTE A PLACA DE PRATA!</h2>
+            <p id="plaque-subtext">A tua comunidade atintiu os 1.000 inscritos!</p>
+            <button class="btn-start" id="close-plaque-btn">✨ Continuar a Transmitir</button>
+        </div>
+    </div>
+
+    <!-- NOTIFICAÇÃO DE CONQUISTA (TOAST) -->
+    <div id="achievement-toast" class="achievement-toast hidden">
+        <div class="toast-icon">🏆</div>
+        <div class="toast-content">
+            <span class="toast-title" id="toast-header">CONQUISTA DESBLOQUEADA!</span>
+            <span id="toast-desc" class="toast-desc">Primeira Vitória</span>
+        </div>
+    </div>
+
+    <!-- CABEÇALHO EXPANDIDO -->
+    <header class="wide-header">
+        <div class="channel-info">
+            <h1 id="channel-name">Viral Streamer <span class="live-badge" id="live-badge-text">● AO VIVO</span></h1>
+            <p class="subtitle"><span id="user-info-display">Canal</span> • <span id="rank-display">📍 Quarto da Mãe</span></p>
+            <p id="subscribers-display" class="subs-highlight">👥 0 Inscritos</p>
+        </div>
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-label" id="label-total-views">Views Acumuladas</div>
+                <div class="stat-value" id="views-display">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label" id="label-vps">Views / Segundo</div>
+                <div class="stat-value" id="vps-display">0</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ÁREA PRINCIPAL EXPANDIDA (LARGURA TOTAL DO ECRÃ) -->
+    <main class="game-layout-wide">
+        
+        <!-- COLUNA 1: TRANSMISSÃO & CHAT AO VIVO -->
+        <section class="panel-box stream-panel">
+            <h3 class="panel-header-title">📹 Ecrã de Transmissão</h3>
+            <div class="stream-container">
+                <div class="stream-screen">
+                    <div class="webcam-overlay">
+                        <span class="rec-dot">●</span> WEBCAM <span id="webcam-tier">CAM-1</span>
+                    </div>
+
+                    <!-- FOTO DINÂMICA DO STREAMER (MUDA DE ACORDO COM O SEXO) -->
+                    <img src="" alt="Streamer" class="streamer-main-img" id="main-stream-img">
+
+                    <div class="game-feed">
+                        <p><span id="label-streaming">🎮 A transmitir:</span> <span id="game-title">Pixel Quest 4K</span></p>
+                    </div>
+                </div>
+
+                <div class="live-chat-box">
+                    <div class="chat-header" id="chat-header">💬 Chat da Live</div>
+                    <div class="chat-messages" id="chat-messages"></div>
+                </div>
+            </div>
+
+            <!-- BOTÃO RED GRANDE DE AÇÃO -->
+            <div class="clicker-box" id="clicker-container">
+                <button class="record-btn-red" id="click-btn">
+                    <span class="rec-icon">🔴</span>
+                    <span class="rec-title" id="rec-btn-title">GRAVAR / LIVE</span>
+                    <span class="click-subtext" id="rec-btn-sub">CLICA PARA GERAR VIEWS</span>
+                </button>
+                <div class="event-banner" id="event-banner">🚀 VÍDEO VIRAL! VIEWS 5X (30s)</div>
+            </div>
+        </section>
+
+        <!-- COLUNA 2: MELHORIAS DO SETUP -->
+        <section class="panel-box upgrades-panel">
+            <h3 class="panel-header-title" id="title-upgrades">⚡ Equipamentos & Equipas</h3>
+            <div id="upgrades-list" class="scrollable-content"></div>
+        </section>
+
+        <!-- COLUNA 3: NAVEGAÇÃO POR SECTORES (EVENTOS & COLABS + CONQUISTAS) -->
+        <section class="panel-box right-activities-panel">
+            
+            <!-- NAVEGAÇÃO DE TABS/SECTORES -->
+            <div class="panel-tabs">
+                <button class="tab-btn active" id="tab-events-btn">🤝 Eventos & Colabs</button>
+                <button class="tab-btn" id="tab-achievements-btn">🏆 Conquistas</button>
+            </div>
+
+            <!-- CONTEÚDO TAB 1: EVENTOS E INTERAÇÕES -->
+            <div class="tab-content active" id="tab-events-content">
+                <p class="tab-subtext">Gasta views para participar em eventos com minijogos de resposta rápida que garantem bónus de subscritores!</p>
+                <div id="events-list" class="scrollable-content"></div>
+            </div>
+
+            <!-- CONTEÚDO TAB 2: CONQUISTAS -->
+            <div class="tab-content" id="tab-achievements-content">
+                <div class="achieve-summary">
+                    <span id="title-achievements">Progresso Total:</span> 
+                    <strong id="achievements-count">0/10</strong>
+                </div>
+                <div id="achievements-list" class="scrollable-content"></div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ DE CONTROLOS -->
+    <footer class="footer-controls">
+        <button class="btn-small" id="sound-btn">🔊 Efeitos: LIGADO</button>
+        <button class="btn-small" id="music-btn">🎵 Música: LIGADA</button>
+        <button class="btn-small" id="edit-profile-btn">👤 Editar Perfil</button>
+        <button class="btn-small" id="save-btn">💾 Guardar Jogo</button>
+        <button class="btn-small" id="reset-btn">🔄 Reiniciar Progresso</button>
+    </footer>
+
+    <!-- SELETOR DE IDIOMA -->
+    <div class="lang-selector-corner">
+        <span>🌐</span>
+        <select id="lang-select">
+            <option value="pt">Português 🇵🇹</option>
+            <option value="en">English 🇬🇧</option>
+        </select>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
