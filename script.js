@@ -876,6 +876,31 @@ function triggerViralEvent() {
     }, 30000);
 }
 
+// --- LÓGICA DE ALTERNÂNCIA DE ABAS (EVENTOS & CONQUISTAS) ---
+const tabEventsBtn = document.getElementById('tab-events-btn');
+const tabAchievementsBtn = document.getElementById('tab-achievements-btn');
+
+const tabEventsContent = document.getElementById('tab-events-content');
+const tabAchievementsContent = document.getElementById('tab-achievements-content');
+
+if (tabEventsBtn && tabAchievementsBtn) {
+    tabEventsBtn.addEventListener('click', () => {
+        tabEventsBtn.classList.add('active');
+        tabAchievementsBtn.classList.remove('active');
+
+        tabEventsContent.classList.add('active');
+        tabAchievementsContent.classList.remove('active');
+    });
+
+    tabAchievementsBtn.addEventListener('click', () => {
+        tabAchievementsBtn.classList.add('active');
+        tabEventsBtn.classList.remove('active');
+
+        tabAchievementsContent.classList.add('active');
+        tabEventsContent.classList.remove('active');
+    });
+}
+
 // --- GAME LOOP AUTOMÁTICO ---
 setInterval(() => {
     if (gameState.viewsPerSecond > 0) {
