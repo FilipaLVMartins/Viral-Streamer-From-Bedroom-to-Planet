@@ -49,6 +49,17 @@ const i18n = {
         bonusUpTo: "💥 Bónus até",
         yearsOld: "anos",
         subsAbbrev: "Subs",
+        loginTitle: "🎮 Criar Canal de Stream",
+        loginSubtitle: "Configura a tua identidade para começar a transmitir!",
+        labelName: "Nome do Streamer / Canal",
+        labelGender: "Sexo do Avatar",
+        optFemale: "Feminino ♀",
+        optMale: "Masculino ♂",
+        labelAge: "Idade",
+        labelContent: "Tipo de Conteúdo",
+        optGames: "Games / Jogos",
+        optJustChatting: "Just Chatting / Conversa",
+        btnStartCareer: "🚀 Iniciar Carreira de Streamer",
         ranks: [
             { title: '📍 Quarto da Mãe' },
             { title: '🏠 Sótão Gamer' },
@@ -203,6 +214,17 @@ const i18n = {
         bonusUpTo: "💥 Bonus up to",
         yearsOld: "years old",
         subsAbbrev: "Subs",
+        loginTitle: "🎮 Create Stream Channel",
+        loginSubtitle: "Set up your identity to start streaming!",
+        labelName: "Streamer / Channel Name",
+        labelGender: "Avatar Gender",
+        optFemale: "Female ♀",
+        optMale: "Male ♂",
+        labelAge: "Age",
+        labelContent: "Content Type",
+        optGames: "Games",
+        optJustChatting: "Just Chatting",
+        btnStartCareer: "🚀 Start Streamer Career",
         ranks: [
             { title: "📍 Mom's Bedroom" },
             { title: '🏠 Gamer Attic' },
@@ -371,6 +393,53 @@ let gameState = {
 };
 
 let viralEventActive = false;
+
+// Função chamada pelos botões de idioma no ecrã de login
+function changeLoginLang(lang) {
+    gameState.lang = lang; // Usa a variável oficial do jogo
+    updateLoginUI();       // Atualiza os textos do ecrã inicial
+    
+    // Sincroniza logo com o seletor principal lá atrás
+    const mainLangSelect = document.getElementById('lang-select');
+    if (mainLangSelect) {
+        mainLangSelect.value = lang;
+    }
+}
+
+// Função para atualizar os textos do ecrã de login
+function updateLoginUI() {
+    const t = i18n[gameState.lang];
+    if (!t) return;
+
+    // Função auxiliar
+    const setTxt = (id, txt) => {
+        const el = document.getElementById(id);
+        if (el && txt) el.innerText = txt;
+    };
+
+    // Títulos
+    setTxt('setup-title', t.loginTitle);
+    setTxt('setup-subtitle', t.loginSubtitle);
+
+    // Campo Nome
+    setTxt('label-setup-name', t.labelName);
+
+    // Sexo
+    setTxt('label-setup-gender', t.labelGender);
+    setTxt('opt-gender-male', t.optMale);
+    setTxt('opt-gender-female', t.optFemale);
+
+    // Idade
+    setTxt('label-setup-age', t.labelAge);
+
+    // Categoria de Conteúdo
+    setTxt('label-setup-category', t.labelContent);
+    setTxt('opt-cat-games', t.optGames);
+    setTxt('opt-cat-irl', t.optJustChatting);
+
+    // Botão de Iniciar
+    setTxt('btn-setup-start', t.btnStartCareer);
+}
 
 // --- ÁUDIO SINTETIZADO ---
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();

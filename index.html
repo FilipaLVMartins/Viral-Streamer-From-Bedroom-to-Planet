@@ -11,37 +11,55 @@
     <!-- MODAL DE SETUP INICIAL DO PERFIL -->
     <div id="setup-modal" class="modal-overlay">
         <div class="modal-card">
-            <h2>🎮 Criar Canal de Stream</h2>
-            <p class="modal-subtitle">Configura a tua identidade para começar a transmitir!</p>
+            
+            <!-- Adicionado: Seletor de Idioma no Modal -->
+            <div class="login-lang-selector" style="text-align: right; margin-bottom: 15px;">
+                <button type="button" onclick="changeLoginLang('pt')" style="cursor: pointer; padding: 5px 10px; border-radius: 5px; background: #2c2c3e; color: white; border: 1px solid #555;">🇵🇹 PT</button>
+                <button type="button" onclick="changeLoginLang('en')" style="cursor: pointer; padding: 5px 10px; border-radius: 5px; background: #2c2c3e; color: white; border: 1px solid #555; margin-left: 5px;">🇬🇧 EN</button>
+            </div>
+
+            <!-- Adicionado id="setup-title" -->
+            <h2 id="setup-title">🎮 Criar Canal de Stream</h2>
+            
+            <!-- Adicionado id="setup-subtitle" -->
+            <p id="setup-subtitle" class="modal-subtitle">Configura a tua identidade para começar a transmitir!</p>
+            
             <form id="setup-form">
                 <div class="form-group">
-                    <label for="input-name">Nome do Streamer / Canal</label>
+                    <!-- Adicionado id="label-setup-name" -->
+                    <label id="label-setup-name" for="input-name">Nome do Streamer / Canal</label>
                     <input type="text" id="input-name" placeholder="Ex: PedroGamer, ClaraLive..." required maxLength="20">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="input-gender">Sexo do Avatar</label>
+                        <!-- Adicionado id="label-setup-gender" -->
+                        <label id="label-setup-gender" for="input-gender">Sexo do Avatar</label>
                         <select id="input-gender" required>
-                            <option value="Masculino">Masculino ♂</option>
-                            <option value="Feminino">Feminino ♀</option>
-                            <option value="Outro">Outro ⚧</option>
+                            <!-- Adicionados ids às opções -->
+                            <option id="opt-gender-male" value="Masculino">Masculino ♂</option>
+                            <option id="opt-gender-female" value="Feminino">Feminino ♀</option>
+                            <option id="opt-gender-other" value="Outro">Outro ⚧</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="input-age">Idade</label>
+                        <!-- Adicionado id="label-setup-age" -->
+                        <label id="label-setup-age" for="input-age">Idade</label>
                         <input type="number" id="input-age" placeholder="Ex: 20" min="10" max="99" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="input-category">Tipo de Conteúdo</label>
+                    <!-- Adicionado id="label-setup-category" -->
+                    <label id="label-setup-category" for="input-category">Tipo de Conteúdo</label>
                     <select id="input-category" required>
-                        <option value="Games">🎮 Games / Jogos</option>
-                        <option value="Vlogs">📹 Vlogs & Dia a Dia</option>
-                        <option value="Tech">💻 Tecnologia & Hardware</option>
-                        <option value="IRL">🎙️ Chat / IRL</option>
+                        <!-- Adicionados ids às opções -->
+                        <option id="opt-cat-games" value="Games">🎮 Games / Jogos</option>
+                        <option id="opt-cat-vlogs" value="Vlogs">📹 Vlogs & Dia a Dia</option>
+                        <option id="opt-cat-tech" value="Tech">💻 Tecnologia & Hardware</option>
+                        <option id="opt-cat-irl" value="IRL">🎙️ Chat / IRL</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-start">🚀 Iniciar Carreira de Streamer</button>
+                <!-- Adicionado id="btn-setup-start" -->
+                <button type="submit" id="btn-setup-start" class="btn-start">🚀 Iniciar Carreira de Streamer</button>
             </form>
         </div>
     </div>
