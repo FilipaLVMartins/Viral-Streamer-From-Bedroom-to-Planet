@@ -1,3 +1,8 @@
+// --- CONFIGURAÇÃO DO SUPABASE ---
+const SUPABASE_URL = 'https://vsjxpklaqnlqzyyjqfqt.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZzanhwa2xhcW5scXp5eWpxZnF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyMTQzMTksImV4cCI6MjEwNjc5MDMxOX0.gPszq6IVGaSD5SpbKVaoUBYheEwdIVmV7akxeL1lpXU';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 // --- BASE DE DADOS DE IMAGENS POR SEXO (ATUALIZADA) ---
 const AVATAR_IMAGES = {
     Masculino: "https://www.esafety.gov.au/sites/default/files/2023-01/esafety-online-streaming_thumb.jpg",
@@ -946,43 +951,86 @@ document.getElementById('edit-profile-btn').addEventListener('click', () => {
     setupModal.classList.remove('hidden');
 });
 
-// --- SISTEMA DE GUARDAR E CARREGAR ---
-function saveGame() {
-    localStorage.setItem('viral_streamer_v7_save', JSON.stringify(gameState));
+// --- SISTEMA DE GUARDAR E CARREGAR COM SUPABASE ---
+
+async function saveGame() {
+    // 1. Guarda sempre no LocalStorage
+    try {
+        localStorage.setItem('viral_streamer_v7_save', JSON.stringify(gameState));
+    } catch (e) {
+        console.error('Erro LocalStorage:', e);
+    }
+
+    // 2. Guarda no Supabase só se houver jogador
+    const playerName = gameState?.userProfile?.name;
+    if (!playerName) return;
+
+    if (typeof supabaseClient !== 'undefined') {
+        try {
+            const { error } = await supabaseClient
+                .from('saves')
+                .upsert({ 
+                    player_id: playerName, 
+                    game_data: gameState 
+                });
+
+            if (error) console.error('Erro Supabase:', error.message);
+            else console.log('✅ Guardado no Supabase com sucesso!');
+        } catch (err) {
+            console.error('Erro de rede:', err);
+        }
+    }
 }
 
-function loadGame() {
+async function loadGame() {
+    // 1. Tenta carregar do LocalStorage primeiro (para arranque instantâneo)
     const saved = localStorage.getItem('viral_streamer_v7_save');
     if (saved) {
-        const parsed = JSON.parse(saved);
-        gameState = { ...gameState, ...parsed };
-        recalculateVPS();
+        try {
+            const parsed = JSON.parse(saved);
+            gameState = { ...gameState, ...parsed };
+            if (typeof recalculateVPS === 'function') recalculateVPS();
+        } catch (e) {
+            console.error('Erro ao ler LocalStorage:', e);
+        }
     }
-    
+
+    // 2. Tenta carregar do Supabase se o jogador tiver registo e a biblioteca existir
+    if (gameState?.userProfile?.name && typeof supabaseClient !== 'undefined') {
+        try {
+            const { data, error } = await supabaseClient
+                .from('saves')
+                .select('game_data')
+                .eq('player_id', gameState.userProfile.name)
+                .single();
+
+            if (data && data.game_data) {
+                gameState = { ...gameState, ...data.game_data };
+                if (typeof recalculateVPS === 'function') recalculateVPS();
+            }
+            if (error) {
+                console.warn('Aviso ao carregar do Supabase:', error.message);
+            }
+        } catch (err) {
+            console.error('Erro de rede ao carregar do Supabase:', err);
+        }
+    }
+
+    // 3. Mostra ou esconde o modal de criação de personagem
     if (!gameState.userProfile || !gameState.userProfile.name) {
         setupModal.classList.remove('hidden');
     } else {
         setupModal.classList.add('hidden');
     }
 
-    langSelect.value = gameState.lang;
-    resetChatForLanguage();
+    // 4. Atualiza obrigatoriamente a interface do jogo no final
+    if (langSelect && gameState.lang) langSelect.value = gameState.lang;
+    if (typeof resetChatForLanguage === 'function') resetChatForLanguage();
+    
     buildUpgradesDOM();
     buildEventsDOM();
     updateUI();
 }
-
-document.getElementById('save-btn').addEventListener('click', () => {
-    saveGame();
-    alert(i18n[gameState.lang].savedAlert);
-});
-
-document.getElementById('reset-btn').addEventListener('click', () => {
-    if (confirm(i18n[gameState.lang].confirmReset)) {
-        localStorage.removeItem('viral_streamer_v7_save');
-        location.reload();
-    }
-});
 
 // CONTROLOS DE ÁUDIO
 document.getElementById('sound-btn').addEventListener('click', () => {
