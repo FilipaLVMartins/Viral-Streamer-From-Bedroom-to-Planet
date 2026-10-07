@@ -42,6 +42,13 @@ const i18n = {
         participateText: "🎬 Participar",
         confirmReset: "Queres mesmo reiniciar todo o teu império de streaming?",
         savedAlert: "Jogo guardado com sucesso!",
+        newsTitle: "📰 Notícias do Streamer",
+        titleStream: "📹 Ecrã de Transmissão",
+        tabEvents: "🤝 Eventos & Colabs",
+        tabAchievements: "🏆 Conquistas",
+        bonusUpTo: "💥 Bónus até",
+        yearsOld: "anos",
+        subsAbbrev: "Subs",
         ranks: [
             { title: '📍 Quarto da Mãe' },
             { title: '🏠 Sótão Gamer' },
@@ -189,6 +196,13 @@ const i18n = {
         participateText: "🎬 Join",
         confirmReset: "Are you sure you want to reset your streaming empire?",
         savedAlert: "Game saved successfully!",
+        newsTitle: "📰 Streamer News",
+        titleStream: "📹 Stream Screen",
+        tabEvents: "🤝 Events & Collabs",
+        tabAchievements: "🏆 Achievements",
+        bonusUpTo: "💥 Bonus up to",
+        yearsOld: "years old",
+        subsAbbrev: "Subs",
         ranks: [
             { title: "📍 Mom's Bedroom" },
             { title: '🏠 Gamer Attic' },
@@ -535,6 +549,9 @@ function updateUI() {
     document.getElementById('edit-profile-btn').innerText = t.editProfileBtn;
     document.getElementById('save-btn').innerText = t.saveBtn;
     document.getElementById('reset-btn').innerText = t.resetBtn;
+    document.getElementById('title-stream').innerText = t.titleStream;
+    document.getElementById('tab-events-btn').innerText = t.tabEvents;
+    document.getElementById('tab-achievements-btn').innerText = t.tabAchievements;
     
     document.getElementById('sound-btn').innerText = `${t.sfxBtn} ${gameState.soundEnabled ? t.on : t.off}`;
     document.getElementById('music-btn').innerText = `${t.musicBtn} ${gameState.musicEnabled ? t.on : t.off}`;
@@ -549,7 +566,7 @@ function updateUI() {
 
     const u = gameState.userProfile;
     document.getElementById('channel-name').childNodes[0].nodeValue = `${u.name || 'Viral Streamer'} `;
-    document.getElementById('user-info-display').innerText = `${u.category || 'Games'} • ${u.age || 20} anos`;
+    document.getElementById('user-info-display').innerText = `${u.category || 'Games'} • ${u.age || 20} ${t.yearsOld}`;
 
     updateRankAndAvatar(subs);
     checkAchievementsAndPlaque(subs);
@@ -694,7 +711,7 @@ function buildEventsDOM() {
                 <span class="count-tag" id="ev-count-${index}">x${ev.count}</span>
             </div>
             <span class="card-desc">${evText.desc}</span>
-            <span class="event-bonus">💥 Bónus até +${formatNumber(ev.baseSubBonus * 2.5)} Subs</span>
+            <span class="event-bonus">${t.bonusUpTo} +${formatNumber(ev.baseSubBonus * 2.5)} ${t.subsAbbrev}</span>
             <div class="card-footer-row">
                 <span class="cost-tag" id="ev-cost-${index}">👁️ ${formatNumber(ev.cost)}</span>
                 <button class="btn-buy-action" id="ev-btn-${index}">
