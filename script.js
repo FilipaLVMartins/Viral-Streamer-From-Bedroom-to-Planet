@@ -148,9 +148,9 @@ const i18n = {
         ],
         chatMessages: [
             'Manda abraço!', 'QUE JOGADA! 🔥', 'GG!!', 'Subi para patrocinador!', 
-            'Melhor live de sempre ❤', 'Hype total!!', 'Qual é o teu setup?', 'LOL fantástico!'
+            'Melhor live de sempre ❤', 'Hype total!!', 'Qual é o teu setup?', 'LOL fantástico!', 'Adoro-te!', 'Manda um salve!', 'És o melhor!'
         ],
-        donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream'],
+        donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream', 'Pintinho_Ninja', 'Queli_Ninja'],
         donationMsgs: ['Para o café!', 'Continua o grande trabalho! 🔥', 'Manda um abraço na stream!', 'Top de live!'],
         newsTemplates: [
             "📈 O teu canal superou o marco de {subs} inscritos!",
@@ -295,9 +295,9 @@ const i18n = {
         ],
         chatMessages: [
             'Shoutout please!', 'WHAT A PLAY! 🔥', 'GG!!', 'Just subscribed!', 
-            'Best stream ever ❤', 'Total Hype!!', 'What pc specs?', 'LOL awesome!'
+            'Best stream ever ❤', 'Total Hype!!', 'What pc specs?', 'LOL awesome!', 'I love this game!', 'So many people watching!!??', 'OMGG', 'WP!!'
         ],
-        donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream'],
+        donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream', 'Pintinho_Ninja', 'Queli_Ninja'],
         donationMsgs: ['Coffee money!', 'Keep up the epic work! 🔥', 'Shoutout on stream please!', 'Best stream!'],
         newsTemplates: [
             "📈 Your channel crossed the {subs} subscribers mark!",
