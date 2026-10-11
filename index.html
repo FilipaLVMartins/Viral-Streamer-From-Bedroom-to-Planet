@@ -11,60 +11,48 @@
     <!-- MODAL DE SETUP INICIAL DO PERFIL -->
     <div id="setup-modal" class="modal-overlay">
         <div class="modal-card">
-            
-            <!-- Adicionado: Seletor de Idioma no Modal -->
             <div class="login-lang-selector" style="text-align: right; margin-bottom: 15px;">
                 <button type="button" onclick="changeLoginLang('pt')" style="cursor: pointer; padding: 5px 10px; border-radius: 5px; background: #2c2c3e; color: white; border: 1px solid #555;">🇵🇹 PT</button>
                 <button type="button" onclick="changeLoginLang('en')" style="cursor: pointer; padding: 5px 10px; border-radius: 5px; background: #2c2c3e; color: white; border: 1px solid #555; margin-left: 5px;">🇬🇧 EN</button>
             </div>
 
-            <!-- Adicionado id="setup-title" -->
             <h2 id="setup-title">🎮 Criar Canal de Stream</h2>
-            
-            <!-- Adicionado id="setup-subtitle" -->
             <p id="setup-subtitle" class="modal-subtitle">Configura a tua identidade para começar a transmitir!</p>
             
             <form id="setup-form">
                 <div class="form-group">
-                    <!-- Adicionado id="label-setup-name" -->
                     <label id="label-setup-name" for="input-name">Nome do Streamer / Canal</label>
                     <input type="text" id="input-name" placeholder="Ex: PedroGamer, ClaraLive..." required maxLength="20">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <!-- Adicionado id="label-setup-gender" -->
                         <label id="label-setup-gender" for="input-gender">Sexo do Avatar</label>
                         <select id="input-gender" required>
-                            <!-- Adicionados ids às opções -->
                             <option id="opt-gender-male" value="Masculino">Masculino ♂</option>
                             <option id="opt-gender-female" value="Feminino">Feminino ♀</option>
                             <option id="opt-gender-other" value="Outro">Outro ⚧</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <!-- Adicionado id="label-setup-age" -->
                         <label id="label-setup-age" for="input-age">Idade</label>
                         <input type="number" id="input-age" placeholder="Ex: 20" min="10" max="99" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <!-- Adicionado id="label-setup-category" -->
                     <label id="label-setup-category" for="input-category">Tipo de Conteúdo</label>
                     <select id="input-category" required>
-                        <!-- Adicionados ids às opções -->
                         <option id="opt-cat-games" value="Games">🎮 Games / Jogos</option>
                         <option id="opt-cat-vlogs" value="Vlogs">📹 Vlogs & Dia a Dia</option>
                         <option id="opt-cat-tech" value="Tech">💻 Tecnologia & Hardware</option>
                         <option id="opt-cat-irl" value="IRL">🎙️ Chat / IRL</option>
                     </select>
                 </div>
-                <!-- Adicionado id="btn-setup-start" -->
                 <button type="submit" id="btn-setup-start" class="btn-start">🚀 Iniciar Carreira de Streamer</button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL DE INTERAÇÃO / CUTSCENE (COLABS, EVENTOS & FÃS) -->
+    <!-- MODAL DE INTERAÇÃO / CUTSCENE -->
     <div id="cutscene-modal" class="modal-overlay hidden">
         <div class="modal-card cutscene-card">
             <div class="cutscene-header">
@@ -81,25 +69,23 @@
                     </div>
                 </div>
 
-                <div class="choices-container" id="cut-choices">
-                    <!-- Botões de escolha injetados via JS -->
-                </div>
+                <div class="choices-container" id="cut-choices"></div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL DA PLACA DE 1.000 SUBSCRITORES -->
+    <!-- MODAL DA PLACA DE SUBSCRITORES -->
     <div id="plaque-modal" class="modal-overlay hidden">
         <div class="modal-card plaque-card">
             <div class="plaque-frame">
-                <div class="plaque-icon">🏆</div>
-                <div class="plaque-header">APRESENTADO A</div>
+                <div class="plaque-icon" id="modal-plaque-icon">🏆</div>
+                <div class="plaque-header" id="modal-plaque-header">APRESENTADO A</div>
                 <div class="plaque-channel-name" id="plaque-user-name">NOME DO CANAL</div>
-                <div class="plaque-desc" id="plaque-category-desc">POR ULTRAPASSAR 1.000 SUBSCRITORES</div>
-                <div class="plaque-logo">YT STREAM AWARDS</div>
+                <div class="plaque-desc" id="plaque-category-desc">POR ULTRAPASSAR X SUBSCRITORES</div>
+                <div class="plaque-logo">STREAM AWARDS</div>
             </div>
-            <h2>🎉 PARABÉNS! GANHASTE A PLACA DE PRATA!</h2>
-            <p id="plaque-subtext">A tua comunidade atingiu os 1.000 inscritos!</p>
+            <h2 id="plaque-title-text">🎉 PARABÉNS! GANHASTE UMA PLACA!</h2>
+            <p id="plaque-subtext">A tua comunidade continua a crescer!</p>
             <button class="btn-start" id="close-plaque-btn">✨ Continuar a Transmitir</button>
         </div>
     </div>
@@ -112,6 +98,22 @@
             <span id="toast-desc" class="toast-desc">Primeira Vitória</span>
         </div>
     </div>
+
+    <!-- BARRA DE NAVEGAÇÃO DE LOCAIS (NAV BAR) -->
+    <nav class="location-nav">
+        <button class="nav-loc-btn active" id="nav-btn-studio" onclick="switchLocation('studio')">
+            🎙️ <span id="nav-label-studio">Estúdio</span>
+        </button>
+        <button class="nav-loc-btn" id="nav-btn-life" onclick="switchLocation('life')">
+            🏠 <span id="nav-label-life">Vida Pessoal</span>
+        </button>
+        <button class="nav-loc-btn" id="nav-btn-merch" onclick="switchLocation('merch')">
+            🛍️ <span id="nav-label-merch">Loja Merch</span>
+        </button>
+        <button class="nav-loc-btn" id="nav-btn-marketing" onclick="switchLocation('marketing')">
+            📢 <span id="nav-label-marketing">Marketing</span>
+        </button>
+    </nav>
 
     <!-- CABEÇALHO PRINCIPAL -->
     <header class="wide-header">
@@ -129,18 +131,19 @@
                 <div class="stat-label" id="label-vps">Views / Segundo</div>
                 <div class="stat-value" id="vps-display">0</div>
             </div>
+            <div class="stat-box">
+                <div class="stat-label" id="label-money-title">Saldo (€)</div>
+                <div class="stat-value" id="balance-display">€ 0.00</div>
+            </div>
         </div>
     </header>
 
-    <!-- ÁREA PRINCIPAL DO JOGO (3 PAINÉIS SUPERIORES) -->
-    <main class="game-layout-wide">
-        
-        <!-- PAINEL 1: TRANSMISSÃO & COMUNIDADE -->
+    <!-- LOCAL 1: ESTÚDIO DE STREAMING -->
+    <main class="game-layout-wide location-section" id="location-studio">
         <section class="panel-box stream-panel">
             <h3 class="panel-header-title" id="title-stream">📹 Ecrã de Transmissão</h3>
             
             <div class="stream-container">
-                <!-- ECRÃ DA WEBCAM -->
                 <div class="stream-screen">
                     <div class="webcam-overlay">
                         <span class="rec-dot">●</span> WEBCAM <span id="webcam-tier">CAM-1</span>
@@ -148,12 +151,20 @@
 
                     <img src="" alt="Streamer" class="streamer-main-img" id="main-stream-img">
 
+                    <!-- MURAL DE PLACAS NA PAREDE DO ESTÚDIO -->
+                    <div class="plaques-wall" id="plaques-wall">
+                        <div class="wall-plaque locked" id="wall-plaque-bronze" title="Bronze (1K)">🥉</div>
+                        <div class="wall-plaque locked" id="wall-plaque-silver" title="Prata (10K)">🥈</div>
+                        <div class="wall-plaque locked" id="wall-plaque-gold" title="Ouro (100K)">🥇</div>
+                        <div class="wall-plaque locked" id="wall-plaque-diamond" title="Diamante (1M)">💎</div>
+                        <div class="wall-plaque locked" id="wall-plaque-dark" title="Matéria Escura (10M)">👑</div>
+                    </div>
+
                     <div class="game-feed">
                         <p><span id="label-streaming">🎮 A transmitir:</span> <span id="game-title">Pixel Quest 4K</span></p>
                     </div>
                 </div>
 
-                <!-- LIVE CHAT E BOTÃO INTERATIVO -->
                 <div class="live-chat-column">
                     <div class="live-chat-box">
                         <div class="chat-header" id="chat-header">💬 Chat da Live</div>
@@ -165,34 +176,26 @@
                 </div>
             </div>
 
-            <!-- SUB-PAINÉIS DE DONATIVOS/SALDO E NOTÍCIAS -->
             <div class="community-subpanels">
-                
-                <!-- PAINEL DE DONATIVOS & SALDO -->
                 <div class="subpanel-box donations-box">
                     <div class="subpanel-header">
                         <span id="label-donations-title">💰 Donativos & Saldo</span>
-                        <span class="balance-badge" id="balance-display">€ 0.00</span>
                     </div>
                     <div class="donations-feed" id="donations-feed"></div>
                 </div>
 
-                <!-- PAINEL DE NOTÍCIAS -->
                 <div class="subpanel-box news-box">
                     <div class="subpanel-header" id="label-news-title">📰 Notícias do Streamer</div>
                     <div class="news-feed" id="news-feed"></div>
                 </div>
-
             </div>
         </section>
 
-        <!-- PAINEL 2: EQUIPAMENTOS & STAFF -->
         <section class="panel-box upgrades-panel">
             <h3 class="panel-header-title" id="title-upgrades">⚡ Equipamentos & Equipas</h3>
             <div id="upgrades-list" class="scrollable-content"></div>
         </section>
 
-        <!-- PAINEL 3: EVENTOS & CONQUISTAS -->
         <section class="panel-box right-activities-panel">
             <div class="panel-tabs">
                 <button class="tab-btn active" id="tab-events-btn">🤝 Eventos & Colabs</button>
@@ -212,11 +215,46 @@
                 <div id="achievements-list" class="scrollable-content"></div>
             </div>
         </section>
-
     </main>
 
-    <!-- ÁREA DEDICADA AO BOTÃO DE GRAVAÇÃO (CENTRALIZADO NO MEIO INFERIOR) -->
-    <div class="center-record-dock">
+    <!-- LOCAL 2: VIDA PESSOAL & LUXOS -->
+    <main class="game-layout-wide location-section hidden" id="location-life">
+        <section class="panel-box">
+            <h3 class="panel-header-title" id="title-houses">🏠 Casas & Imóveis</h3>
+            <div id="houses-list" class="scrollable-content"></div>
+        </section>
+
+        <section class="panel-box">
+            <h3 class="panel-header-title" id="title-cars">🏎️ Carros & Veículos</h3>
+            <div id="cars-list" class="scrollable-content"></div>
+        </section>
+
+        <section class="panel-box">
+            <h3 class="panel-header-title" id="title-lifestyle">❤️ Encontros & Vida Social</h3>
+            <div id="social-list" class="scrollable-content"></div>
+        </section>
+    </main>
+
+    <!-- LOCAL 3: LOJA DE MERCHANDISING -->
+    <main class="game-layout-wide location-section hidden" id="location-merch">
+        <section class="panel-box" style="grid-column: span 3;">
+            <h3 class="panel-header-title" id="title-merch">👕 Lançar Produtos de Merchandising (€/s)</h3>
+            <p class="tab-subtext" id="subtext-merch">Gasta Euros para criar a tua marca de roupa e acessórios para gerar rendimento passivo!</p>
+            <div id="merch-list" class="scrollable-content"></div>
+        </section>
+    </main>
+
+    <!-- LOCAL 4: AGÊNCIA DE MARKETING -->
+    <main class="game-layout-wide location-section hidden" id="location-marketing">
+        <section class="panel-box" style="grid-column: span 3;">
+            <h3 class="panel-header-title" id="title-marketing">📢 Campanhas de Anúncios & Patrocínios</h3>
+            <p class="tab-subtext" id="subtext-marketing">Investe em publicidade e parcerias para obter bónus temporários massivos de Views!</p>
+            <div id="marketing-list" class="scrollable-content"></div>
+        </section>
+    </main>
+
+    <!-- DOCK DE GRAVAÇÃO -->
+    <div class="center-record-dock" id="record-dock">
         <button class="record-btn-red" id="click-btn">
             <span class="rec-title" id="rec-btn-title">RECORD / LIVE</span>
             <span class="click-subtext" id="rec-btn-sub">CLICA PARA GERAR VIEWS</span>
@@ -233,7 +271,7 @@
         <button class="btn-small" id="reset-btn">🔄 Reiniciar Progresso</button>
     </footer>
 
-    <!-- SELETOR DE IDIOMA -->
+    <!-- SELETOR DE IDIOMA CORNER -->
     <div class="lang-selector-corner">
         <span>🌐</span>
         <select id="lang-select">
@@ -242,9 +280,8 @@
         </select>
     </div>
 
-    <!-- SDK DO SUPABASE -->
+    <!-- SDK SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <script src="script.js"></script>
 </body>
 </html>

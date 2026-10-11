@@ -3,7 +3,6 @@ const SUPABASE_URL = 'https://vsjxpklaqnlqzyyjqfqt.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZzanhwa2xhcW5scXp5eWpxZnF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyMTQzMTksImV4cCI6MjEwNjc5MDMxOX0.gPszq6IVGaSD5SpbKVaoUBYheEwdIVmV7akxeL1lpXU';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// --- BASE DE DADOS DE IMAGENS POR SEXO (ATUALIZADA) ---
 const AVATAR_IMAGES = {
     Masculino: "https://www.esafety.gov.au/sites/default/files/2023-01/esafety-online-streaming_thumb.jpg",
     Feminino: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgxXQILc3wjjftJ6d8NhS93fypBisSWcSd25omE6jME68VKzGeXT_Qyvg&s=10",
@@ -42,7 +41,6 @@ const i18n = {
         participateText: "🎬 Participar",
         confirmReset: "Queres mesmo reiniciar todo o teu império de streaming?",
         savedAlert: "Jogo guardado com sucesso!",
-        newsTitle: "📰 Notícias do Streamer",
         titleStream: "📹 Ecrã de Transmissão",
         tabEvents: "🤝 Eventos & Colabs",
         tabAchievements: "🏆 Conquistas",
@@ -60,6 +58,27 @@ const i18n = {
         optGames: "Games / Jogos",
         optJustChatting: "Just Chatting / Conversa",
         btnStartCareer: "🚀 Iniciar Carreira de Streamer",
+        navStudio: "Estúdio",
+        navLife: "Vida Pessoal",
+        navMerch: "Loja Merch",
+        navMarketing: "Marketing",
+        reqLife: "🔒 Requer 500 Subs",
+        reqMerch: "🔒 Requer 10.000 Subs",
+        reqMarketing: "🔒 Requer 100.000 Subs",
+        titleHouses: "🏠 Casas & Imóveis",
+        titleCars: "🏎️ Carros & Veículos",
+        titleLifestyle: "❤️ Encontros & Vida Social",
+        titleMerch: "👕 Lançar Produtos de Merchandising (€/s)",
+        subtextMerch: "Gasta Euros para criar a tua marca de roupa e gerar rendimento passivo!",
+        titleMarketing: "📢 Campanhas de Anúncios & Patrocínios",
+        subtextMarketing: "Investe em publicidade e ganha bónus temporários massivos de Views!",
+        labelMoneyTitle: "Saldo (€)",
+        cooldownWait: "Aguarde",
+        plaqueBronze: "Placa de Bronze",
+        plaqueSilver: "Placa de Prata",
+        plaqueGold: "Placa de Ouro",
+        plaqueDiamond: "Placa de Diamante",
+        plaqueDark: "Placa de Matéria Escura",
         ranks: [
             { title: '📍 Quarto da Mãe' },
             { title: '🏠 Sótão Gamer' },
@@ -68,13 +87,40 @@ const i18n = {
             { title: '🚀 Estação Espacial' }
         ],
         upgrades: [
-            { name: '💻 Teclado Mecânico RGB', desc: '+1 View/clique' },
-            { name: '🎙️ Microfone de Lapela', desc: '+1 View/seg' },
-            { name: '💡 Ring Light Profissional', desc: '+8 Views/seg' },
-            { name: '🎬 Editor de Vídeo Pago', desc: '+45 Views/seg' },
-            { name: '🪑 Cadeira Gamer Pro', desc: '+200 Views/seg' },
-            { name: '⚡ Patrocínio Energético', desc: '+1.100 Views/seg' },
-            { name: '🖥️ Supercomputador RGC', desc: '+6.000 Views/seg' }
+            { name: '💻 Teclado Mecânico RGB', desc: '+1 View/clique (Escala por nível)' },
+            { name: '🎙️ Microfone de Lapela', desc: '+1 View/seg (Escala por nível)' },
+            { name: '💡 Ring Light Profissional', desc: '+8 Views/seg (Escala por nível)' },
+            { name: '🎬 Editor de Vídeo Pago', desc: '+45 Views/seg (Escala por nível)' },
+            { name: '🪑 Cadeira Gamer Pro', desc: '+200 Views/seg (Escala por nível)' },
+            { name: '⚡ Patrocínio Energético', desc: '+1.100 Views/seg (Escala por nível)' },
+            { name: '🖥️ Supercomputador RGC', desc: '+6.000 Views/seg (Escala por nível)' }
+        ],
+        houses: [
+            { name: '🏠 Sótão Gamer', desc: '+10% retenção de subs', cost: 500 },
+            { name: '🎙️ Estúdio Neon Moderno', desc: '+25% retenção de subs', cost: 2500 },
+            { name: '🏙️ Penthouse Luxuosa', desc: '+50% retenção de subs', cost: 15000 },
+            { name: '🚀 Villa na Estação Espacial', desc: 'Duplica todos os ganhos!', cost: 100000 }
+        ],
+        cars: [
+            { name: '🚗 Carro Usado de Cidade', desc: '+50 Subs em post social', cost: 200 },
+            { name: '🏎️ Coupé Desportivo', desc: '+500 Subs em post social', cost: 1500 },
+            { name: '🏎️ Supercarro Italiano', desc: '+5.000 Subs em post social', cost: 12000 }
+        ],
+        lifestyle: [
+            { name: '☕ Café com Streamer Amigo', desc: 'Ganha +100 subs instantâneos', cost: 50 },
+            { name: '🎬 Jantar VIP de Criadores', desc: 'Ganha +800 subs instantâneos', cost: 300 },
+            { name: '✈️ Viagem de Luxo com Fãs', desc: 'Ganha +4.000 subs instantâneos', cost: 2000 }
+        ],
+        merch: [
+            { name: '👕 T-Shirt Oficial do Canal', desc: '+€0.50 / segundo', cost: 100, income: 0.5 },
+            { name: '🧥 Hoodie Gamer Edição Limitada', desc: '+€2.50 / segundo', cost: 500, income: 2.5 },
+            { name: '🧢 Boné Neon Personalizado', desc: '+€10.00 / segundo', cost: 2500, income: 10.0 },
+            { name: '🥤 Bebida Energética Própria', desc: '+€50.00 / segundo', cost: 10000, income: 50.0 }
+        ],
+        marketing: [
+            { name: '📢 Impulsionar Vídeo no TikTok', desc: 'Multiplica views 2x por 30s', cost: 50, mult: 2, duration: 30 },
+            { name: '⭐ Anúncio com Influencer VIP', desc: 'Multiplica views 5x por 20s', cost: 250, mult: 5, duration: 20 },
+            { name: '📺 Anúncio de Televisão em Direto', desc: 'Multiplica views 10x por 15s', cost: 1500, mult: 10, duration: 15 }
         ],
         events: [
             { name: '🤝 Colab com Streamer', desc: 'Faz uma live conjunta!' },
@@ -91,14 +137,6 @@ const i18n = {
                         { text: "🎯 'Vamos jogar focado e mostrar jogadas de alto nível!'", bonusMult: 1.0, feedback: "A comunidade pro adorou a jogada!" },
                         { text: "😂 'Vamos fazer desafios engraçados e rir muito!'", bonusMult: 1.5, feedback: "O vídeo tornou-se viral em memes!" },
                         { text: "🔥 'Desafio-te a um duelo direto com castigo!'", bonusMult: 2.0, feedback: "A rivalidade fez o contador de subs explodir!" }
-                    ]
-                },
-                {
-                    npcName: "Gamer Sofia", avatar: "🎮", badge: "🤝 MARATONA CO-OP", title: "Maratona Co-Op",
-                    dialogue: "Chegámos ao nível final do jogo! O chat quer saber qual vai ser a nossa estratégia!",
-                    choices: [
-                        { text: "🛡️ 'Eu protejo a retaguarda enquanto avanças!'", bonusMult: 1.1, feedback: "Trabalho de equipa exemplar louvado pelo chat!" },
-                        { text: "🚀 'Avançar à doida sem olhar para trás!'", bonusMult: 1.7, feedback: "O caos gerou momentos hilariantes na stream!" }
                     ]
                 }
             ],
@@ -142,14 +180,6 @@ const i18n = {
                     { text: "🎧 'Investe tudo num bom microfone e boa iluminação!'", bonusSubs: 80, money: 25.0, feedback: "Dica valiosa elogiada pela comunidade!" },
                     { text: "🤖 'Sinceramente? Clica no botão vermelho e não penses muito!'", bonusSubs: 200, money: 10.0, feedback: "A tua resposta descontraída virou meme no chat!" }
                 ]
-            },
-            {
-                npcName: "Moderador do Chat", avatar: "🛡️️", badge: "💬 PERGUNTA DA COMUNIDADE", title: "Escolha de Conteúdo",
-                dialogue: "A comunidade no Discord está a pedir um especial de 24 horas! O que respondemos?",
-                choices: [
-                    { text: "🚀 'Vamos a isso! Preparar os energéticos para as 24h!'", bonusSubs: 350, money: 50.0, feedback: "Hype absoluto! O chat explodiu em subscrições!" },
-                    { text: "🎮 'Preferia fazer uma maratona de 12h focada num jogo novo.'", bonusSubs: 180, money: 30.0, feedback: "A comunidade adorou o plano de maratona!" }
-                ]
             }
         ],
         achievements: [
@@ -166,16 +196,10 @@ const i18n = {
         ],
         chatMessages: [
             'Manda abraço!', 'QUE JOGADA! 🔥', 'GG!!', 'Subi para patrocinador!', 
-            'Melhor live de sempre ❤', 'Hype total!!', 'Qual é o teu setup?', 'LOL fantástico!', 'Adoro-te!', 'Manda um salve!', 'És o melhor!'
+            'Melhor live de sempre ❤', 'Hype total!!', 'Comprei a t-shirt do canal!', 'Que carro incrível!'
         ],
-        donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream', 'Pintinho_Ninja', 'Queli_Ninja'],
-        donationMsgs: ['Para o café!', 'Continua o grande trabalho! 🔥', 'Manda um abraço na stream!', 'Top de live!'],
-        newsTemplates: [
-            "📈 O teu canal superou o marco de {subs} inscritos!",
-            "🔥 A tua última stream virou tendência nas redes sociais!",
-            "🎙️ Marcas de tecnologia estão de olho no teu crescimento!",
-            "⭐ Fãs criaram uma página de memes sobre a tua live!"
-        ]
+        donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream'],
+        donationMsgs: ['Para o café!', 'Continua o grande trabalho! 🔥', 'Manda um abraço na stream!', 'Top de live!']
     },
     en: {
         liveBadge: "● LIVE",
@@ -207,7 +231,6 @@ const i18n = {
         participateText: "🎬 Join",
         confirmReset: "Are you sure you want to reset your streaming empire?",
         savedAlert: "Game saved successfully!",
-        newsTitle: "📰 Streamer News",
         titleStream: "📹 Stream Screen",
         tabEvents: "🤝 Events & Collabs",
         tabAchievements: "🏆 Achievements",
@@ -225,6 +248,27 @@ const i18n = {
         optGames: "Games",
         optJustChatting: "Just Chatting",
         btnStartCareer: "🚀 Start Streamer Career",
+        navStudio: "Studio",
+        navLife: "Personal Life",
+        navMerch: "Merch Shop",
+        navMarketing: "Marketing",
+        reqLife: "🔒 Requires 500 Subs",
+        reqMerch: "🔒 Requires 10,000 Subs",
+        reqMarketing: "🔒 Requires 100,000 Subs",
+        titleHouses: "🏠 Houses & Real Estate",
+        titleCars: "🏎️ Cars & Vehicles",
+        titleLifestyle: "❤️ Dates & Social Life",
+        titleMerch: "👕 Launch Merchandising Products (€/s)",
+        subtextMerch: "Spend Euros to build your apparel brand and generate passive income!",
+        titleMarketing: "📢 Ad Campaigns & Sponsorships",
+        subtextMarketing: "Invest in advertising for massive temporary View boosts!",
+        labelMoneyTitle: "Balance (€)",
+        cooldownWait: "Wait",
+        plaqueBronze: "Bronze Play Button",
+        plaqueSilver: "Silver Play Button",
+        plaqueGold: "Gold Play Button",
+        plaqueDiamond: "Diamond Play Button",
+        plaqueDark: "Dark Matter Play Button",
         ranks: [
             { title: "📍 Mom's Bedroom" },
             { title: '🏠 Gamer Attic' },
@@ -233,13 +277,40 @@ const i18n = {
             { title: '🚀 Space Station' }
         ],
         upgrades: [
-            { name: '💻 RGB Mechanical Keyboard', desc: '+1 View/click' },
-            { name: '🎙️️ Lapel Microphone', desc: '+1 View/sec' },
-            { name: '💡 Pro Ring Light', desc: '+8 Views/sec' },
-            { name: '🎬 Paid Video Editor', desc: '+45 Views/sec' },
-            { name: '🪑 Pro Gaming Chair', desc: '+200 Views/sec' },
-            { name: '⚡ Energy Drink Sponsor', desc: '+1,100 Views/sec' },
-            { name: '🖥️ RGC Supercomputer', desc: '+6,000 Views/sec' }
+            { name: '💻 RGB Mechanical Keyboard', desc: '+1 View/click (Level scaling)' },
+            { name: '🎙 Lapel Microphone', desc: '+1 View/sec (Level scaling)' },
+            { name: '💡 Pro Ring Light', desc: '+8 Views/sec (Level scaling)' },
+            { name: '🎬 Paid Video Editor', desc: '+45 Views/sec (Level scaling)' },
+            { name: '🪑 Pro Gaming Chair', desc: '+200 Views/sec (Level scaling)' },
+            { name: '⚡ Energy Drink Sponsor', desc: '+1,100 Views/sec (Level scaling)' },
+            { name: '🖥️ RGC Supercomputer', desc: '+6,000 Views/sec (Level scaling)' }
+        ],
+        houses: [
+            { name: '🏠 Gamer Attic', desc: '+10% sub retention', cost: 500 },
+            { name: '🎙️ Modern Neon Studio', desc: '+25% sub retention', cost: 2500 },
+            { name: '🏙️ Luxury Penthouse', desc: '+50% sub retention', cost: 15000 },
+            { name: '🚀 Space Station Villa', desc: 'Double all earnings!', cost: 100000 }
+        ],
+        cars: [
+            { name: '🚗 Used City Car', desc: '+50 Subs on social post', cost: 200 },
+            { name: '🏎️ Sports Coupe', desc: '+500 Subs on social post', cost: 1500 },
+            { name: '🏎️ Italian Supercar', desc: '+5,000 Subs on social post', cost: 12000 }
+        ],
+        lifestyle: [
+            { name: '☕ Coffee with Streamer Friend', desc: 'Gain +100 instant subs', cost: 50 },
+            { name: '🎬 VIP Creator Dinner', desc: 'Gain +800 instant subs', cost: 300 },
+            { name: '✈️ Luxury Trip with Fans', desc: 'Gain +4,000 instant subs', cost: 2000 }
+        ],
+        merch: [
+            { name: '👕 Official Channel T-Shirt', desc: '+€0.50 / second', cost: 100, income: 0.5 },
+            { name: '🧥 Limited Edition Gamer Hoodie', desc: '+€2.50 / second', cost: 500, income: 2.5 },
+            { name: '🧢 Custom Neon Cap', desc: '+€10.00 / second', cost: 2500, income: 10.0 },
+            { name: '🥤 Branded Energy Drink', desc: '+€50.00 / second', cost: 10000, income: 50.0 }
+        ],
+        marketing: [
+            { name: '📢 Boost Video on TikTok', desc: 'Multiply views 2x for 30s', cost: 50, mult: 2, duration: 30 },
+            { name: '⭐ Ad with VIP Influencer', desc: 'Multiply views 5x for 20s', cost: 250, mult: 5, duration: 20 },
+            { name: '📺 Live TV Commercial', desc: 'Multiply views 10x for 15s', cost: 1500, mult: 10, duration: 15 }
         ],
         events: [
             { name: '🤝 Streamer Collab', desc: 'Host a joint stream!' },
@@ -256,14 +327,6 @@ const i18n = {
                         { text: "🎯 'Let's focus and show pro-level gameplay!'", bonusMult: 1.0, feedback: "Pro gamers loved your skills!" },
                         { text: "😂 'Let's do funny challenges and laugh!'", bonusMult: 1.5, feedback: "The stream clip went viral on social media!" },
                         { text: "🔥 'I challenge you to a 1v1 duel with punishment!'", bonusMult: 2.0, feedback: "The rivalry exploded the subscriber counter!" }
-                    ]
-                },
-                {
-                    npcName: "Gamer Sofia", avatar: "🎮", badge: "🤝 CO-OP MARATHON", title: "Co-Op Marathon",
-                    dialogue: "We reached the final level of the game! The chat wants to know our strategy!",
-                    choices: [
-                        { text: "🛡️ 'I cover your back while you advance!'", bonusMult: 1.1, feedback: "Exemplary teamwork praised by the chat!" },
-                        { text: "🚀 'Rush blindly without looking back!'", bonusMult: 1.7, feedback: "The chaos generated hilarious moments!" }
                     ]
                 }
             ],
@@ -307,14 +370,6 @@ const i18n = {
                     { text: "🎧 'Invest in a good microphone and lighting!'", bonusSubs: 80, money: 25.0, feedback: "Great tip praised by the community!" },
                     { text: "🤖 'Just press the red button and don't overthink!'", bonusSubs: 200, money: 10.0, feedback: "Your chill answer became a chat meme!" }
                 ]
-            },
-            {
-                npcName: "Chat Moderator", avatar: "🛡️", badge: "💬 COMMUNITY QUESTION", title: "Content Choice",
-                dialogue: "Discord community is asking for a 24h stream special! What should we say?",
-                choices: [
-                    { text: "🚀 'Let's do it! Get the energy drinks ready!'", bonusSubs: 350, money: 50.0, feedback: "Total hype! Chat exploded with sub renewals!" },
-                    { text: "🎮 'I prefer a 12h marathon focused on a new game.'", bonusSubs: 180, money: 30.0, feedback: "Community loved the marathon plan!" }
-                ]
             }
         ],
         achievements: [
@@ -331,38 +386,31 @@ const i18n = {
         ],
         chatMessages: [
             'Shoutout please!', 'WHAT A PLAY! 🔥', 'GG!!', 'Just subscribed!', 
-            'Best stream ever ❤', 'Total Hype!!', 'What pc specs?', 'LOL awesome!', 'I love this game!', 'So many people watching!!??', 'OMGG', 'WP!!'
+            'Best stream ever ❤', 'Total Hype!!', 'Bought the merch!', 'Awesome car!!'
         ],
-        donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream', 'Pintinho_Ninja', 'Queli_Ninja'],
-        donationMsgs: ['Coffee money!', 'Keep up the epic work! 🔥', 'Shoutout on stream please!', 'Best stream!'],
-        newsTemplates: [
-            "📈 Your channel crossed the {subs} subscribers mark!",
-            "🔥 Your latest stream is trending on social media!",
-            "🎙️ Tech sponsors are noticing your fast growth!",
-            "⭐ Fans created a meme page dedicated to your live!"
-        ]
+        donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream'],
+        donationMsgs: ['Coffee money!', 'Keep up the epic work! 🔥', 'Shoutout on stream please!', 'Best stream!']
     }
 };
 
 // --- ESTADO GLOBAL DO JOGO ---
 let gameState = {
     lang: 'pt',
-    userProfile: {
-        name: '',
-        gender: 'Masculino',
-        age: 20,
-        category: 'Games'
-    },
+    currentLocation: 'studio',
+    userProfile: { name: '', gender: 'Masculino', age: 20, category: 'Games' },
     plaqueAwarded: false,
+    plaquesUnlocked: { bronze: false, silver: false, gold: false, diamond: false, dark: false },
     views: 0,
     totalViews: 0,
     money: 0.00,
+    moneyPerSecond: 0.00,
     bonusSubscribers: 0,
     viewsPerClick: 1,
     viewsPerSecond: 0,
     multiplier: 1,
     soundEnabled: true,
     musicEnabled: true,
+    interactCooldownEnd: 0,
     upgrades: [
         { id: 'click_1', cost: 15, vpc: 1, vps: 0, count: 0 },
         { id: 'mic', cost: 50, vpc: 0, vps: 1, count: 0 },
@@ -372,6 +420,10 @@ let gameState = {
         { id: 'sponsor', cost: 50000, vpc: 0, vps: 1100, count: 0 },
         { id: 'pc', cost: 250000, vpc: 0, vps: 6000, count: 0 }
     ],
+    houses: [ { count: 0 }, { count: 0 }, { count: 0 }, { count: 0 } ],
+    cars: [ { count: 0 }, { count: 0 }, { count: 0 } ],
+    lifestyle: [ { count: 0 }, { count: 0 }, { count: 0 } ],
+    merch: [ { count: 0 }, { count: 0 }, { count: 0 }, { count: 0 } ],
     events: [
         { id: 'collab', cost: 500, baseSubBonus: 150, count: 0 },
         { id: 'con', cost: 3000, baseSubBonus: 800, count: 0 },
@@ -394,50 +446,31 @@ let gameState = {
 
 let viralEventActive = false;
 
-// Função chamada pelos botões de idioma no ecrã de login
 function changeLoginLang(lang) {
-    gameState.lang = lang; // Usa a variável oficial do jogo
-    updateLoginUI();       // Atualiza os textos do ecrã inicial
-    
-    // Sincroniza logo com o seletor principal lá atrás
+    gameState.lang = lang;
+    updateLoginUI();
     const mainLangSelect = document.getElementById('lang-select');
-    if (mainLangSelect) {
-        mainLangSelect.value = lang;
-    }
+    if (mainLangSelect) mainLangSelect.value = lang;
 }
 
-// Função para atualizar os textos do ecrã de login
 function updateLoginUI() {
     const t = i18n[gameState.lang];
     if (!t) return;
-
-    // Função auxiliar
     const setTxt = (id, txt) => {
         const el = document.getElementById(id);
         if (el && txt) el.innerText = txt;
     };
 
-    // Títulos
     setTxt('setup-title', t.loginTitle);
     setTxt('setup-subtitle', t.loginSubtitle);
-
-    // Campo Nome
     setTxt('label-setup-name', t.labelName);
-
-    // Sexo
     setTxt('label-setup-gender', t.labelGender);
     setTxt('opt-gender-male', t.optMale);
     setTxt('opt-gender-female', t.optFemale);
-
-    // Idade
     setTxt('label-setup-age', t.labelAge);
-
-    // Categoria de Conteúdo
     setTxt('label-setup-category', t.labelContent);
     setTxt('opt-cat-games', t.optGames);
     setTxt('opt-cat-irl', t.optJustChatting);
-
-    // Botão de Iniciar
     setTxt('btn-setup-start', t.btnStartCareer);
 }
 
@@ -495,7 +528,6 @@ function playAchievementSFX() {
     setTimeout(() => playTone(784, 'sine', 0.2), 200);
 }
 
-// --- FORMATAÇÃO DE NÚMEROS ---
 function formatNumber(num) {
     if (num >= 1e9) return (num / 1e9).toFixed(2) + 'B';
     if (num >= 1e6) return (num / 1e6).toFixed(2) + 'M';
@@ -503,7 +535,39 @@ function formatNumber(num) {
     return Math.floor(num).toLocaleString(gameState.lang === 'pt' ? 'pt-PT' : 'en-US');
 }
 
-// --- FASES (RANKS) ---
+// --- ESCALA DE EFICIÊNCIA POR NÍVEL ---
+function recalculateStats() {
+    let newVpc = 1;
+    let newVps = 0;
+
+    gameState.upgrades.forEach((up, index) => {
+        if (up.count > 0) {
+            let count = up.count;
+            let mult = 1 + ((count - 1) * 0.12); // Bónus acumulativo por nível
+
+            if (index === 0) {
+                newVpc += Math.floor(count * 1 * mult);
+            } else {
+                let baseValues = [0, 1, 8, 45, 200, 1100, 6000];
+                newVps += Math.floor(baseValues[index] * count * mult);
+            }
+        }
+    });
+
+    gameState.viewsPerClick = newVpc;
+    gameState.viewsPerSecond = newVps;
+}
+
+function recalculateMerchIncome() {
+    let totalIncome = 0;
+    const baseIncomes = [0.5, 2.5, 10.0, 50.0];
+    gameState.merch.forEach((item, idx) => {
+        totalIncome += item.count * baseIncomes[idx];
+    });
+    gameState.moneyPerSecond = totalIncome;
+}
+
+// --- FASES (RANKS) & PLACAS ---
 const RANKS_CONFIG = [
     { subs: 0, cam: 'CAM-1', game: 'Pixel Quest 4K' },
     { subs: 100, cam: 'CAM-2', game: 'Super Block Crafter' },
@@ -527,16 +591,126 @@ function updateRankAndAvatar(subs) {
 
     const gender = gameState.userProfile.gender || 'Masculino';
     const streamImg = document.getElementById('main-stream-img');
-    streamImg.src = AVATAR_IMAGES[gender] || AVATAR_IMAGES.Masculino;
+    if (streamImg) streamImg.src = AVATAR_IMAGES[gender] || AVATAR_IMAGES.Masculino;
 
     if (rankIndex === 4) unlockAchievement('planet_rank');
 }
 
-// --- CHAT, DONATIVOS & NOTÍCIAS DINÂMICAS ---
+// --- CONTROLO DE NAVEGAÇÃO ENTRE LOCAIS ---
+function switchLocation(locationKey) {
+    const subs = Math.floor(Math.sqrt(gameState.totalViews)) + (gameState.bonusSubscribers || 0);
+
+    if (locationKey === 'life' && subs < 500) return;
+    if (locationKey === 'merch' && subs < 10000) return;
+    if (locationKey === 'marketing' && subs < 100000) return;
+
+    gameState.currentLocation = locationKey;
+
+    document.querySelectorAll('.location-section').forEach(sec => sec.classList.add('hidden'));
+    document.querySelectorAll('.nav-loc-btn').forEach(btn => btn.classList.remove('active'));
+
+    const activeSec = document.getElementById(`location-${locationKey}`);
+    const activeBtn = document.getElementById(`nav-btn-${locationKey}`);
+
+    if (activeSec) activeSec.classList.remove('hidden');
+    if (activeBtn) activeBtn.classList.add('active');
+
+    const recordDock = document.getElementById('record-dock');
+    if (recordDock) {
+        if (locationKey === 'studio') recordDock.style.display = 'flex';
+        else recordDock.style.display = 'none';
+    }
+}
+
+function updateNavigationButtons() {
+    const t = i18n[gameState.lang];
+    const subs = Math.floor(Math.sqrt(gameState.totalViews)) + (gameState.bonusSubscribers || 0);
+
+    const btnStudio = document.getElementById('nav-btn-studio');
+    const btnLife = document.getElementById('nav-btn-life');
+    const btnMerch = document.getElementById('nav-btn-merch');
+    const btnMarketing = document.getElementById('nav-btn-marketing');
+
+    if (btnStudio) document.getElementById('nav-label-studio').innerText = t.navStudio;
+
+    if (btnLife) {
+        if (subs >= 500) {
+            btnLife.disabled = false;
+            document.getElementById('nav-label-life').innerText = t.navLife;
+        } else {
+            btnLife.disabled = true;
+            document.getElementById('nav-label-life').innerText = t.reqLife;
+        }
+    }
+
+    if (btnMerch) {
+        if (subs >= 10000) {
+            btnMerch.disabled = false;
+            document.getElementById('nav-label-merch').innerText = t.navMerch;
+        } else {
+            btnMerch.disabled = true;
+            document.getElementById('nav-label-merch').innerText = t.reqMerch;
+        }
+    }
+
+    if (btnMarketing) {
+        if (subs >= 100000) {
+            btnMarketing.disabled = false;
+            document.getElementById('nav-label-marketing').innerText = t.navMarketing;
+        } else {
+            btnMarketing.disabled = true;
+            document.getElementById('nav-label-marketing').innerText = t.reqMarketing;
+        }
+    }
+}
+
+// --- MURAL DE PLACAS DA PAREDE & MODAL DE PLACAS ---
+function checkPlaques(subs) {
+    const t = i18n[gameState.lang];
+    const p = gameState.plaquesUnlocked;
+
+    const checkPlaqueTier = (tierKey, reqSubs, plaqueTitle, icon) => {
+        const wallEl = document.getElementById(`wall-plaque-${tierKey}`);
+        if (subs >= reqSubs) {
+            if (wallEl) wallEl.classList.remove('locked');
+            if (!p[tierKey]) {
+                p[tierKey] = true;
+                triggerPlaqueModal(plaqueTitle, reqSubs, icon);
+            }
+        }
+    };
+
+    checkPlaqueTier('bronze', 1000, t.plaqueBronze, '🥉');
+    checkPlaqueTier('silver', 10000, t.plaqueSilver, '🥈');
+    checkPlaqueTier('gold', 100000, t.plaqueGold, '🥇');
+    checkPlaqueTier('diamond', 1000000, t.plaqueDiamond, '💎');
+    checkPlaqueTier('dark', 10000000, t.plaqueDark, '👑');
+}
+
+function triggerPlaqueModal(title, reqSubs, icon) {
+    const modal = document.getElementById('plaque-modal');
+    if (!modal) return;
+
+    document.getElementById('modal-plaque-icon').innerText = icon;
+    document.getElementById('plaque-user-name').innerText = gameState.userProfile.name || 'STREAMER';
+    document.getElementById('plaque-category-desc').innerText = `POR ULTRAPASSAR ${formatNumber(reqSubs)} SUBSCRITORES`;
+    document.getElementById('plaque-title-text').innerText = `🎉 PARABÉNS! GANHASTE A ${title.toUpperCase()}!`;
+    
+    modal.classList.remove('hidden');
+    playAchievementSFX();
+}
+
+document.getElementById('close-plaque-btn').addEventListener('click', () => {
+    document.getElementById('plaque-modal').classList.add('hidden');
+});
+
+// --- CHAT & DONATIVOS ---
 function resetChatForLanguage() {
     const chatContainer = document.getElementById('chat-messages');
-    chatContainer.innerHTML = '';
-    addChatMessage('ModBot', i18n[gameState.lang].welcomeChat);
+    if (chatContainer) {
+        chatContainer.innerHTML = '';
+        addChatMessage('ModBot', i18n[gameState.lang].welcomeChat);
+    }
 }
 
 function addChatMessage(user, text) {
@@ -547,9 +721,7 @@ function addChatMessage(user, text) {
     line.innerHTML = `<span class="chat-user">${user}:</span> ${text}`;
     chatContainer.appendChild(line);
 
-    if (chatContainer.children.length > 10) {
-        chatContainer.removeChild(chatContainer.firstChild);
-    }
+    if (chatContainer.children.length > 10) chatContainer.removeChild(chatContainer.firstChild);
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
@@ -597,50 +769,72 @@ setInterval(() => {
     }
 }, 3000);
 
-// --- ATUALIZAÇÃO LEVE DA INTERFACE (SEM DELAY) ---
+// --- ATUALIZAÇÃO DA INTERFACE ---
 function updateUI() {
     const t = i18n[gameState.lang];
 
-    document.getElementById('live-badge-text').innerText = t.liveBadge;
-    document.getElementById('label-total-views').innerText = t.totalViews;
-    document.getElementById('label-vps').innerText = t.vps;
-    document.getElementById('label-streaming').innerText = t.streaming;
-    document.getElementById('rec-btn-title').innerText = t.recTitle;
-    document.getElementById('rec-btn-sub').innerText = t.recSub;
-    document.getElementById('event-banner').innerText = t.viralBanner;
-    document.getElementById('chat-header').innerText = t.chatHeader;
-    document.getElementById('toast-header').innerText = t.toastHeader;
-    document.getElementById('title-upgrades').innerText = t.titleUpgrades;
-    document.getElementById('interact-fans-btn').innerText = t.interactFansBtn;
-    document.getElementById('label-donations-title').innerText = t.donationsTitle;
-    document.getElementById('label-news-title').innerText = t.newsTitle;
-    document.getElementById('label-events-subtext').innerText = t.eventsSubtext;
-    document.getElementById('edit-profile-btn').innerText = t.editProfileBtn;
-    document.getElementById('save-btn').innerText = t.saveBtn;
-    document.getElementById('reset-btn').innerText = t.resetBtn;
-    document.getElementById('title-stream').innerText = t.titleStream;
-    document.getElementById('tab-events-btn').innerText = t.tabEvents;
-    document.getElementById('tab-achievements-btn').innerText = t.tabAchievements;
-    
-    document.getElementById('sound-btn').innerText = `${t.sfxBtn} ${gameState.soundEnabled ? t.on : t.off}`;
-    document.getElementById('music-btn').innerText = `${t.musicBtn} ${gameState.musicEnabled ? t.on : t.off}`;
+    const setTxt = (id, txt) => {
+        const el = document.getElementById(id);
+        if (el && txt !== undefined) el.innerText = txt;
+    };
 
-    document.getElementById('views-display').innerText = formatNumber(gameState.views);
-    document.getElementById('vps-display').innerText = formatNumber(gameState.viewsPerSecond * gameState.multiplier);
-    document.getElementById('balance-display').innerText = `€ ${(gameState.money || 0).toFixed(2)}`;
+    setTxt('live-badge-text', t.liveBadge);
+    setTxt('label-total-views', t.totalViews);
+    setTxt('label-vps', t.vps);
+    setTxt('label-streaming', t.streaming);
+    setTxt('rec-btn-title', t.recTitle);
+    setTxt('rec-btn-sub', t.recSub);
+    setTxt('event-banner', t.viralBanner);
+    setTxt('chat-header', t.chatHeader);
+    setTxt('toast-header', t.toastHeader);
+    setTxt('title-upgrades', t.titleUpgrades);
+    setTxt('label-donations-title', t.donationsTitle);
+    setTxt('label-news-title', t.newsTitle);
+    setTxt('label-events-subtext', t.eventsSubtext);
+    setTxt('edit-profile-btn', t.editProfileBtn);
+    setTxt('save-btn', t.saveBtn);
+    setTxt('reset-btn', t.resetBtn);
+    setTxt('title-stream', t.titleStream);
+    setTxt('tab-events-btn', t.tabEvents);
+    setTxt('tab-achievements-btn', t.tabAchievements);
+    setTxt('label-money-title', t.labelMoneyTitle);
+
+    setTxt('title-houses', t.titleHouses);
+    setTxt('title-cars', t.titleCars);
+    setTxt('title-lifestyle', t.titleLifestyle);
+    setTxt('title-merch', t.titleMerch);
+    setTxt('subtext-merch', t.subtextMerch);
+    setTxt('title-marketing', t.titleMarketing);
+    setTxt('subtext-marketing', t.subtextMarketing);
+
+    setTxt('sound-btn', `${t.sfxBtn} ${gameState.soundEnabled ? t.on : t.off}`);
+    setTxt('music-btn', `${t.musicBtn} ${gameState.musicEnabled ? t.on : t.off}`);
+
+    setTxt('views-display', formatNumber(gameState.views));
+    setTxt('vps-display', formatNumber(gameState.viewsPerSecond * gameState.multiplier));
+    setTxt('balance-display', `€ ${(gameState.money || 0).toFixed(2)}${gameState.moneyPerSecond > 0 ? ` (+€${gameState.moneyPerSecond.toFixed(1)}/s)` : ''}`);
     
     let baseSubs = Math.floor(Math.sqrt(gameState.totalViews));
     let subs = baseSubs + (gameState.bonusSubscribers || 0);
-    document.getElementById('subscribers-display').innerText = `👥 ${formatNumber(subs)} ${t.subs}`;
+    setTxt('subscribers-display', `👥 ${formatNumber(subs)} ${t.subs}`);
 
     const u = gameState.userProfile;
-    document.getElementById('channel-name').childNodes[0].nodeValue = `${u.name || 'Viral Streamer'} `;
-    document.getElementById('user-info-display').innerText = `${u.category || 'Games'} • ${u.age || 20} ${t.yearsOld}`;
+    const chName = document.getElementById('channel-name');
+    if (chName && chName.childNodes[0]) {
+        chName.childNodes[0].nodeValue = `${u.name || 'Viral Streamer'} `;
+    }
+    setTxt('user-info-display', `${u.category || 'Games'} • ${u.age || 20} ${t.yearsOld}`);
 
     updateRankAndAvatar(subs);
     checkAchievementsAndPlaque(subs);
+    checkPlaques(subs);
+    updateNavigationButtons();
     updateUpgradeButtonsState();
     updateEventButtonsState();
+    updateLifeButtonsState();
+    updateMerchButtonsState();
+    updateMarketingButtonsState();
+    updateInteractCooldownBtn();
     renderAchievements();
 }
 
@@ -648,38 +842,28 @@ function checkAchievementsAndPlaque(subs) {
     if (gameState.totalViews >= 100) unlockAchievement('views_100');
     if (gameState.totalViews >= 1000000) unlockAchievement('views_1m');
     if (subs >= 50000) unlockAchievement('subs_50k');
-
-    if (subs >= 1000) {
-        unlockAchievement('subs_1k');
-        if (!gameState.plaqueAwarded) {
-            gameState.plaqueAwarded = true;
-            document.getElementById('plaque-user-name').innerText = gameState.userProfile.name || 'STREAMER';
-            document.getElementById('plaque-modal').classList.remove('hidden');
-        }
-    }
+    if (subs >= 1000) unlockAchievement('subs_1k');
 }
 
-document.getElementById('close-plaque-btn').addEventListener('click', () => {
-    document.getElementById('plaque-modal').classList.add('hidden');
-});
-
-// --- BOTÃO RED DE CLIQUE ---
+// --- BOTÃO DE CLIQUE ---
 const clickBtn = document.getElementById('click-btn');
+if (clickBtn) {
+    clickBtn.addEventListener('click', (e) => {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
 
-clickBtn.addEventListener('click', (e) => {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
+        let gained = gameState.viewsPerClick * gameState.multiplier;
+        gameState.views += gained;
+        gameState.totalViews += gained;
 
-    let gained = gameState.viewsPerClick * gameState.multiplier;
-    gameState.views += gained;
-    gameState.totalViews += gained;
-
-    playClickSFX();
-    unlockAchievement('rec_1');
-    createFloatText(e, `+${formatNumber(gained)}`);
-    updateUI();
-});
+        playClickSFX();
+        unlockAchievement('rec_1');
+        createFloatText(e, `+${formatNumber(gained)}`);
+        updateUI();
+    });
+}
 
 function createFloatText(e, text) {
+    if (!clickBtn) return;
     const rect = clickBtn.getBoundingClientRect();
     const floatEl = document.createElement('div');
     floatEl.className = 'float-text';
@@ -695,9 +879,10 @@ function createFloatText(e, text) {
     setTimeout(() => floatEl.remove(), 800);
 }
 
-// --- CONSTRUÇÃO & ATUALIZAÇÃO SEM LAG DOS UPGRADES ---
+// --- CONSTRUÇÃO DE TODAS AS LISTAS VISUAIS ---
 function buildUpgradesDOM() {
     const listEl = document.getElementById('upgrades-list');
+    if (!listEl) return;
     listEl.innerHTML = '';
     const t = i18n[gameState.lang];
 
@@ -714,9 +899,7 @@ function buildUpgradesDOM() {
             <span class="card-desc">${upText.desc}</span>
             <div class="card-footer-row">
                 <span class="cost-tag" id="up-cost-${index}">👁️ ${formatNumber(up.cost)}</span>
-                <button class="btn-buy-action" id="up-btn-${index}">
-                    ${t.buyBtnText}
-                </button>
+                <button class="btn-buy-action" id="up-btn-${index}">${t.buyBtnText}</button>
             </div>
         `;
 
@@ -732,10 +915,7 @@ function updateUpgradeButtonsState() {
         const costTag = document.getElementById(`up-cost-${index}`);
         const countTag = document.getElementById(`up-count-${index}`);
 
-        if (btn) {
-            btn.disabled = gameState.views < up.cost;
-            btn.innerText = t.buyBtnText;
-        }
+        if (btn) btn.disabled = gameState.views < up.cost;
         if (costTag) costTag.innerText = `👁️ ${formatNumber(up.cost)}`;
         if (countTag) countTag.innerText = `${t.level} ${up.count}`;
     });
@@ -746,12 +926,8 @@ function buyUpgrade(index) {
     if (gameState.views >= up.cost) {
         gameState.views -= up.cost;
         up.count++;
-        
-        if (up.vpc > 0) gameState.viewsPerClick += up.vpc;
-        if (up.vps > 0) recalculateVPS();
-
-        up.cost = Math.floor(up.cost * 1.15);
-
+        recalculateStats();
+        up.cost = Math.floor(up.cost * 1.25);
         playBuySFX();
         unlockAchievement('upgrade_first');
         updateUI();
@@ -759,13 +935,225 @@ function buyUpgrade(index) {
     }
 }
 
-function recalculateVPS() {
-    gameState.viewsPerSecond = gameState.upgrades.reduce((total, up) => total + (up.vps * up.count), 0);
+// --- CONSTRUÇÃO DE VIDA PESSOAL (CASAS, CARROS, VIDA SOCIAL) ---
+function buildLifeDOM() {
+    const housesEl = document.getElementById('houses-list');
+    const carsEl = document.getElementById('cars-list');
+    const socialEl = document.getElementById('social-list');
+
+    const t = i18n[gameState.lang];
+
+    if (housesEl) {
+        housesEl.innerHTML = '';
+        t.houses.forEach((h, idx) => {
+            const card = document.createElement('div');
+            card.className = 'upgrade-card';
+            card.innerHTML = `
+                <div class="card-header-row">
+                    <span class="card-title">${h.name}</span>
+                    <span class="count-tag" id="house-count-${idx}">${t.level} ${gameState.houses[idx].count}</span>
+                </div>
+                <span class="card-desc">${h.desc}</span>
+                <div class="card-footer-row">
+                    <span class="cost-tag" id="house-cost-${idx}">€ ${h.cost}</span>
+                    <button class="btn-buy-action" id="house-btn-${idx}">${t.buyBtnText}</button>
+                </div>
+            `;
+            housesEl.appendChild(card);
+            document.getElementById(`house-btn-${idx}`).onclick = () => buyHouse(idx);
+        });
+    }
+
+    if (carsEl) {
+        carsEl.innerHTML = '';
+        t.cars.forEach((c, idx) => {
+            const card = document.createElement('div');
+            card.className = 'upgrade-card';
+            card.innerHTML = `
+                <div class="card-header-row">
+                    <span class="card-title">${c.name}</span>
+                    <span class="count-tag" id="car-count-${idx}">${t.level} ${gameState.cars[idx].count}</span>
+                </div>
+                <span class="card-desc">${c.desc}</span>
+                <div class="card-footer-row">
+                    <span class="cost-tag" id="car-cost-${idx}">€ ${c.cost}</span>
+                    <button class="btn-buy-action" id="car-btn-${idx}">${t.buyBtnText}</button>
+                </div>
+            `;
+            carsEl.appendChild(card);
+            document.getElementById(`car-btn-${idx}`).onclick = () => buyCar(idx);
+        });
+    }
+
+    if (socialEl) {
+        socialEl.innerHTML = '';
+        t.lifestyle.forEach((s, idx) => {
+            const card = document.createElement('div');
+            card.className = 'upgrade-card';
+            card.innerHTML = `
+                <div class="card-header-row">
+                    <span class="card-title">${s.name}</span>
+                </div>
+                <span class="card-desc">${s.desc}</span>
+                <div class="card-footer-row">
+                    <span class="cost-tag">€ ${s.cost}</span>
+                    <button class="btn-buy-action" id="social-btn-${idx}">${t.participateText}</button>
+                </div>
+            `;
+            socialEl.appendChild(card);
+            document.getElementById(`social-btn-${idx}`).onclick = () => buySocial(idx);
+        });
+    }
 }
 
-// --- CONSTRUÇÃO E ATUALIZAÇÃO DE EVENTOS & CUTSCENES ---
+function updateLifeButtonsState() {
+    const t = i18n[gameState.lang];
+    t.houses.forEach((h, idx) => {
+        const btn = document.getElementById(`house-btn-${idx}`);
+        if (btn) btn.disabled = gameState.money < h.cost;
+    });
+    t.cars.forEach((c, idx) => {
+        const btn = document.getElementById(`car-btn-${idx}`);
+        if (btn) btn.disabled = gameState.money < c.cost;
+    });
+    t.lifestyle.forEach((s, idx) => {
+        const btn = document.getElementById(`social-btn-${idx}`);
+        if (btn) btn.disabled = gameState.money < s.cost;
+    });
+}
+
+function buyHouse(idx) {
+    const h = i18n[gameState.lang].houses[idx];
+    if (gameState.money >= h.cost) {
+        gameState.money -= h.cost;
+        gameState.houses[idx].count++;
+        playBuySFX();
+        updateUI();
+    }
+}
+
+function buyCar(idx) {
+    const c = i18n[gameState.lang].cars[idx];
+    const bonuses = [50, 500, 5000];
+    if (gameState.money >= c.cost) {
+        gameState.money -= c.cost;
+        gameState.cars[idx].count++;
+        gameState.bonusSubscribers += bonuses[idx];
+        playBuySFX();
+        addNewsItem(`🏎️ Novo carro comprado! +${bonuses[idx]} subs!`);
+        updateUI();
+    }
+}
+
+function buySocial(idx) {
+    const s = i18n[gameState.lang].lifestyle[idx];
+    const bonuses = [100, 800, 4000];
+    if (gameState.money >= s.cost) {
+        gameState.money -= s.cost;
+        gameState.lifestyle[idx].count++;
+        gameState.bonusSubscribers += bonuses[idx];
+        playBuySFX();
+        updateUI();
+    }
+}
+
+// --- CONSTRUÇÃO DE MERCHANDISING ---
+function buildMerchDOM() {
+    const listEl = document.getElementById('merch-list');
+    if (!listEl) return;
+    listEl.innerHTML = '';
+    const t = i18n[gameState.lang];
+
+    t.merch.forEach((m, idx) => {
+        const card = document.createElement('div');
+        card.className = 'upgrade-card';
+        card.innerHTML = `
+            <div class="card-header-row">
+                <span class="card-title">${m.name}</span>
+                <span class="count-tag" id="merch-count-${idx}">${t.level} ${gameState.merch[idx].count}</span>
+            </div>
+            <span class="card-desc">${m.desc}</span>
+            <div class="card-footer-row">
+                <span class="cost-tag" id="merch-cost-${idx}">€ ${m.cost}</span>
+                <button class="btn-buy-action" id="merch-btn-${idx}">${t.buyBtnText}</button>
+            </div>
+        `;
+        listEl.appendChild(card);
+        document.getElementById(`merch-btn-${idx}`).onclick = () => buyMerch(idx);
+    });
+}
+
+function updateMerchButtonsState() {
+    const t = i18n[gameState.lang];
+    t.merch.forEach((m, idx) => {
+        const btn = document.getElementById(`merch-btn-${idx}`);
+        if (btn) btn.disabled = gameState.money < m.cost;
+    });
+}
+
+function buyMerch(idx) {
+    const m = i18n[gameState.lang].merch[idx];
+    if (gameState.money >= m.cost) {
+        gameState.money -= m.cost;
+        gameState.merch[idx].count++;
+        recalculateMerchIncome();
+        playBuySFX();
+        updateUI();
+    }
+}
+
+// --- CONSTRUÇÃO DE MARKETING ---
+function buildMarketingDOM() {
+    const listEl = document.getElementById('marketing-list');
+    if (!listEl) return;
+    listEl.innerHTML = '';
+    const t = i18n[gameState.lang];
+
+    t.marketing.forEach((m, idx) => {
+        const card = document.createElement('div');
+        card.className = 'upgrade-card';
+        card.innerHTML = `
+            <div class="card-header-row">
+                <span class="card-title">${m.name}</span>
+            </div>
+            <span class="card-desc">${m.desc}</span>
+            <div class="card-footer-row">
+                <span class="cost-tag">€ ${m.cost}</span>
+                <button class="btn-buy-action" id="marketing-btn-${idx}">${t.participateText}</button>
+            </div>
+        `;
+        listEl.appendChild(card);
+        document.getElementById(`marketing-btn-${idx}`).onclick = () => triggerMarketing(idx);
+    });
+}
+
+function updateMarketingButtonsState() {
+    const t = i18n[gameState.lang];
+    t.marketing.forEach((m, idx) => {
+        const btn = document.getElementById(`marketing-btn-${idx}`);
+        if (btn) btn.disabled = gameState.money < m.cost;
+    });
+}
+
+function triggerMarketing(idx) {
+    const m = i18n[gameState.lang].marketing[idx];
+    if (gameState.money >= m.cost) {
+        gameState.money -= m.cost;
+        gameState.multiplier = m.mult;
+        playBuySFX();
+        updateUI();
+
+        setTimeout(() => {
+            gameState.multiplier = 1;
+            updateUI();
+        }, m.duration * 1000);
+    }
+}
+
+// --- EVENTOS DE CUTSCENE ---
 function buildEventsDOM() {
     const listEl = document.getElementById('events-list');
+    if (!listEl) return;
     listEl.innerHTML = '';
     const t = i18n[gameState.lang];
 
@@ -783,9 +1171,7 @@ function buildEventsDOM() {
             <span class="event-bonus">${t.bonusUpTo} +${formatNumber(ev.baseSubBonus * 2.5)} ${t.subsAbbrev}</span>
             <div class="card-footer-row">
                 <span class="cost-tag" id="ev-cost-${index}">👁️ ${formatNumber(ev.cost)}</span>
-                <button class="btn-buy-action" id="ev-btn-${index}">
-                    ${t.participateText}
-                </button>
+                <button class="btn-buy-action" id="ev-btn-${index}">${t.participateText}</button>
             </div>
         `;
 
@@ -801,16 +1187,12 @@ function updateEventButtonsState() {
         const costTag = document.getElementById(`ev-cost-${index}`);
         const countTag = document.getElementById(`ev-count-${index}`);
 
-        if (btn) {
-            btn.disabled = gameState.views < ev.cost;
-            btn.innerText = t.participateText;
-        }
+        if (btn) btn.disabled = gameState.views < ev.cost;
         if (costTag) costTag.innerText = `👁️ ${formatNumber(ev.cost)}`;
         if (countTag) countTag.innerText = `x${ev.count}`;
     });
 }
 
-// LANÇAMENTO DE CUTSCENE EVENTO
 function launchCutsceneEvent(index) {
     let ev = gameState.events[index];
     if (gameState.views < ev.cost) return;
@@ -840,7 +1222,6 @@ function launchCutsceneEvent(index) {
         btn.onclick = () => {
             let gainedSubs = Math.floor(ev.baseSubBonus * choice.bonusMult);
             gameState.bonusSubscribers = (gameState.bonusSubscribers || 0) + gainedSubs;
-
             ev.cost = Math.floor(ev.cost * 1.35);
 
             modal.classList.add('hidden');
@@ -861,8 +1242,11 @@ function launchCutsceneEvent(index) {
     modal.classList.remove('hidden');
 }
 
-// INTERAÇÃO DIRETA COM OS FÃS
+// --- INTERAÇÃO COM FÃS + TEMPORIZADOR (COOLDOWN) ---
 document.getElementById('interact-fans-btn').addEventListener('click', () => {
+    const now = Date.now();
+    if (now < gameState.interactCooldownEnd) return;
+
     const t = i18n[gameState.lang];
     const fanStories = t.fanStories;
     const story = fanStories[Math.floor(Math.random() * fanStories.length)];
@@ -886,6 +1270,9 @@ document.getElementById('interact-fans-btn').addEventListener('click', () => {
             gameState.bonusSubscribers = (gameState.bonusSubscribers || 0) + choice.bonusSubs;
             gameState.money = (gameState.money || 0) + choice.money;
 
+            // Inicia o cooldown de 45 segundos
+            gameState.interactCooldownEnd = Date.now() + 45000;
+
             modal.classList.add('hidden');
             playBuySFX();
             showAchievementToast(`+${choice.bonusSubs} Subs! ${choice.feedback}`);
@@ -899,6 +1286,21 @@ document.getElementById('interact-fans-btn').addEventListener('click', () => {
 
     modal.classList.remove('hidden');
 });
+
+function updateInteractCooldownBtn() {
+    const btn = document.getElementById('interact-fans-btn');
+    if (!btn) return;
+    const t = i18n[gameState.lang];
+    const remaining = Math.ceil((gameState.interactCooldownEnd - Date.now()) / 1000);
+
+    if (remaining > 0) {
+        btn.disabled = true;
+        btn.innerText = `⏳ ${t.cooldownWait} (${remaining}s)`;
+    } else {
+        btn.disabled = false;
+        btn.innerText = t.interactFansBtn;
+    }
+}
 
 // --- CONQUISTAS ---
 function unlockAchievement(id) {
@@ -914,6 +1316,7 @@ function unlockAchievement(id) {
 
 function showAchievementToast(title) {
     const toast = document.getElementById('achievement-toast');
+    if (!toast) return;
     document.getElementById('toast-desc').innerText = title;
     toast.classList.remove('hidden');
 
@@ -924,6 +1327,7 @@ function showAchievementToast(title) {
 
 function renderAchievements() {
     const listEl = document.getElementById('achievements-list');
+    if (!listEl) return;
     listEl.innerHTML = '';
     const t = i18n[gameState.lang];
 
@@ -943,34 +1347,13 @@ function renderAchievements() {
         listEl.appendChild(card);
     });
 
-    document.getElementById('achievements-count').innerText = `${unlockedCount}/${gameState.achievements.length}`;
+    const achCount = document.getElementById('achievements-count');
+    if (achCount) achCount.innerText = `${unlockedCount}/${gameState.achievements.length}`;
 }
 
-// --- EVENTO VIRAL ---
-setInterval(() => {
-    if (!viralEventActive && Math.random() < 0.3) {
-        triggerViralEvent();
-    }
-}, 60000);
-
-function triggerViralEvent() {
-    viralEventActive = true;
-    gameState.multiplier = 5;
-    document.getElementById('event-banner').style.display = 'block';
-    unlockAchievement('viral_event');
-
-    setTimeout(() => {
-        viralEventActive = false;
-        gameState.multiplier = 1;
-        document.getElementById('event-banner').style.display = 'none';
-        updateUI();
-    }, 30000);
-}
-
-// --- LÓGICA DE ALTERNÂNCIA DE ABAS (EVENTOS & CONQUISTAS) ---
+// --- TABS DE EVENTOS / CONQUISTAS ---
 const tabEventsBtn = document.getElementById('tab-events-btn');
 const tabAchievementsBtn = document.getElementById('tab-achievements-btn');
-
 const tabEventsContent = document.getElementById('tab-events-content');
 const tabAchievementsContent = document.getElementById('tab-achievements-content');
 
@@ -978,7 +1361,6 @@ if (tabEventsBtn && tabAchievementsBtn) {
     tabEventsBtn.addEventListener('click', () => {
         tabEventsBtn.classList.add('active');
         tabAchievementsBtn.classList.remove('active');
-
         tabEventsContent.classList.add('active');
         tabAchievementsContent.classList.remove('active');
     });
@@ -986,7 +1368,6 @@ if (tabEventsBtn && tabAchievementsBtn) {
     tabAchievementsBtn.addEventListener('click', () => {
         tabAchievementsBtn.classList.add('active');
         tabEventsBtn.classList.remove('active');
-
         tabAchievementsContent.classList.add('active');
         tabEventsContent.classList.remove('active');
     });
@@ -998,36 +1379,52 @@ setInterval(() => {
         let gained = (gameState.viewsPerSecond / 10) * gameState.multiplier;
         gameState.views += gained;
         gameState.totalViews += gained;
-        updateUI();
     }
+
+    if (gameState.moneyPerSecond > 0) {
+        gameState.money += (gameState.moneyPerSecond / 10);
+    }
+
+    updateUI();
 }, 100);
 
 // --- SELEÇÃO DE IDIOMA ---
 const langSelect = document.getElementById('lang-select');
-langSelect.addEventListener('change', (e) => {
-    gameState.lang = e.target.value;
-    resetChatForLanguage();
+if (langSelect) {
+    langSelect.addEventListener('change', (e) => {
+        gameState.lang = e.target.value;
+        resetChatForLanguage();
+        rebuildAllDOMs();
+        updateUI();
+        saveGame();
+    });
+}
+
+function rebuildAllDOMs() {
     buildUpgradesDOM();
     buildEventsDOM();
-    updateUI();
-    saveGame();
-});
+    buildLifeDOM();
+    buildMerchDOM();
+    buildMarketingDOM();
+}
 
-// --- SUBMISSÃO DO FORMULÁRIO ---
+// --- FORMULÁRIO INICIAL ---
 const setupModal = document.getElementById('setup-modal');
 const setupForm = document.getElementById('setup-form');
 
-setupForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    gameState.userProfile.name = document.getElementById('input-name').value;
-    gameState.userProfile.gender = document.getElementById('input-gender').value;
-    gameState.userProfile.age = document.getElementById('input-age').value;
-    gameState.userProfile.category = document.getElementById('input-category').value;
+if (setupForm) {
+    setupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        gameState.userProfile.name = document.getElementById('input-name').value;
+        gameState.userProfile.gender = document.getElementById('input-gender').value;
+        gameState.userProfile.age = document.getElementById('input-age').value;
+        gameState.userProfile.category = document.getElementById('input-category').value;
 
-    setupModal.classList.add('hidden');
-    updateUI();
-    saveGame();
-});
+        setupModal.classList.add('hidden');
+        updateUI();
+        saveGame();
+    });
+}
 
 document.getElementById('edit-profile-btn').addEventListener('click', () => {
     document.getElementById('input-name').value = gameState.userProfile.name || '';
@@ -1037,84 +1434,43 @@ document.getElementById('edit-profile-btn').addEventListener('click', () => {
     setupModal.classList.remove('hidden');
 });
 
-// --- SISTEMA DE GUARDAR E CARREGAR COM SUPABASE ---
-
+// --- SISTEMA DE GUARDAR E CARREGAR ---
 async function saveGame() {
-    // 1. Guarda sempre no LocalStorage
     try {
-        localStorage.setItem('viral_streamer_v7_save', JSON.stringify(gameState));
-    } catch (e) {
-        console.error('Erro LocalStorage:', e);
-    }
+        localStorage.setItem('viral_streamer_v8_save', JSON.stringify(gameState));
+    } catch (e) {}
 
-    // 2. Guarda no Supabase só se houver jogador
     const playerName = gameState?.userProfile?.name;
     if (!playerName) return;
 
     if (typeof supabaseClient !== 'undefined') {
         try {
-            const { error } = await supabaseClient
-                .from('saves')
-                .upsert({ 
-                    player_id: playerName, 
-                    game_data: gameState 
-                });
-
-            if (error) console.error('Erro Supabase:', error.message);
-            else console.log('✅ Guardado no Supabase com sucesso!');
-        } catch (err) {
-            console.error('Erro de rede:', err);
-        }
+            await supabaseClient.from('saves').upsert({ player_id: playerName, game_data: gameState });
+        } catch (err) {}
     }
 }
 
 async function loadGame() {
-    // 1. Tenta carregar do LocalStorage primeiro (para arranque instantâneo)
-    const saved = localStorage.getItem('viral_streamer_v7_save');
+    const saved = localStorage.getItem('viral_streamer_v8_save');
     if (saved) {
         try {
             const parsed = JSON.parse(saved);
             gameState = { ...gameState, ...parsed };
-            if (typeof recalculateVPS === 'function') recalculateVPS();
-        } catch (e) {
-            console.error('Erro ao ler LocalStorage:', e);
-        }
+            recalculateStats();
+            recalculateMerchIncome();
+        } catch (e) {}
     }
 
-    // 2. Tenta carregar do Supabase se o jogador tiver registo e a biblioteca existir
-    if (gameState?.userProfile?.name && typeof supabaseClient !== 'undefined') {
-        try {
-            const { data, error } = await supabaseClient
-                .from('saves')
-                .select('game_data')
-                .eq('player_id', gameState.userProfile.name)
-                .single();
-
-            if (data && data.game_data) {
-                gameState = { ...gameState, ...data.game_data };
-                if (typeof recalculateVPS === 'function') recalculateVPS();
-            }
-            if (error) {
-                console.warn('Aviso ao carregar do Supabase:', error.message);
-            }
-        } catch (err) {
-            console.error('Erro de rede ao carregar do Supabase:', err);
-        }
-    }
-
-    // 3. Mostra ou esconde o modal de criação de personagem
     if (!gameState.userProfile || !gameState.userProfile.name) {
         setupModal.classList.remove('hidden');
     } else {
         setupModal.classList.add('hidden');
     }
 
-    // 4. Atualiza obrigatoriamente a interface do jogo no final
     if (langSelect && gameState.lang) langSelect.value = gameState.lang;
-    if (typeof resetChatForLanguage === 'function') resetChatForLanguage();
-    
-    buildUpgradesDOM();
-    buildEventsDOM();
+    resetChatForLanguage();
+    rebuildAllDOMs();
+    switchLocation(gameState.currentLocation || 'studio');
     updateUI();
 }
 

@@ -34,6 +34,47 @@ body {
     padding-bottom: 70px;
 }
 
+/* NAVEGAÇÃO DE LOCAIS DE VIAGEM */
+.location-nav {
+    width: 100%;
+    max-width: 1750px;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.nav-loc-btn {
+    flex: 1;
+    background: rgba(26, 12, 54, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: var(--text-white);
+    padding: 12px;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nav-loc-btn:hover:not(:disabled) {
+    background: var(--card-hover);
+    border-color: var(--baby-blue);
+}
+
+.nav-loc-btn.active {
+    background: linear-gradient(135deg, var(--baby-blue), var(--purple-accent));
+    color: white;
+    border-color: var(--baby-blue);
+    box-shadow: 0 0 15px var(--baby-blue-glow);
+}
+
+.nav-loc-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: #1e1e2d;
+    border-color: #444;
+}
+
 /* HEADER */
 .wide-header {
     width: 100%;
@@ -105,6 +146,30 @@ body {
     color: #ffffff;
 }
 
+/* MURAL DE PLACAS */
+.plaques-wall {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    display: flex;
+    gap: 6px;
+    background: rgba(0,0,0,0.6);
+    padding: 4px 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.wall-plaque {
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+}
+
+.wall-plaque.locked {
+    opacity: 0.2;
+    filter: grayscale(100%);
+}
+
 /* LAYOUT PRINCIPAL DOS PAINÉIS */
 .game-layout-wide {
     display: grid;
@@ -113,6 +178,8 @@ body {
     width: 100%;
     max-width: 1750px;
 }
+
+.game-layout-wide.hidden { display: none !important; }
 
 @media (max-width: 1250px) {
     .game-layout-wide { grid-template-columns: 1fr; }
@@ -138,7 +205,7 @@ body {
     border-bottom: 1px solid rgba(56, 189, 248, 0.2);
 }
 
-/* PAINEL 1: TRANSMISSÃO E COMUNIDADE */
+/* TRANSMISSÃO E CHAT */
 .stream-container {
     display: grid;
     grid-template-columns: 1.3fr 1fr;
@@ -164,10 +231,8 @@ body {
 
 .streamer-main-img {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     object-fit: cover;
     z-index: 1;
 }
@@ -195,12 +260,7 @@ body {
 
 .game-feed span { color: var(--baby-blue); font-weight: bold; }
 
-/* CHAT E BOTÃO DE INTERAÇÃO */
-.live-chat-column {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+.live-chat-column { display: flex; flex-direction: column; gap: 8px; }
 
 .live-chat-box {
     background: rgba(11, 5, 27, 0.85);
@@ -249,14 +309,15 @@ body {
     transition: transform 0.15s;
 }
 
-.btn-interact-fans:hover { transform: scale(1.02); }
-
-/* SUB-PAINÉIS (DONATIVOS & NOTÍCIAS) */
-.community-subpanels {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+.btn-interact-fans:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #475569;
 }
+
+.btn-interact-fans:hover:not(:disabled) { transform: scale(1.02); }
+
+.community-subpanels { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
 .subpanel-box {
     background: rgba(11, 5, 27, 0.75);
@@ -278,14 +339,6 @@ body {
     align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding-bottom: 4px;
-}
-
-.balance-badge {
-    background: rgba(52, 211, 153, 0.15);
-    color: var(--green-views);
-    padding: 2px 8px;
-    border-radius: 8px;
-    font-weight: 800;
 }
 
 .donations-feed, .news-feed {
@@ -315,7 +368,7 @@ body {
     color: var(--text-muted);
 }
 
-/* BOTÃO DE REGISTO/LIVE CENTRALIZADO (DOCK INFERIOR) */
+/* BOTÃO DE REGISTO/LIVE CENTRALIZADO */
 .center-record-dock {
     width: 100%;
     max-width: 1750px;
@@ -348,19 +401,8 @@ body {
 .record-btn-red:hover { transform: scale(1.04); box-shadow: 0 0 50px rgba(239, 68, 68, 0.85); }
 .record-btn-red:active { transform: scale(0.93); }
 
-.rec-title {
-    font-size: 1.25rem;
-    font-weight: 900;
-    letter-spacing: 1px;
-    line-height: 1.2;
-}
-
-.click-subtext {
-    font-size: 0.7rem;
-    opacity: 0.9;
-    margin-top: 4px;
-    font-weight: 600;
-}
+.rec-title { font-size: 1.25rem; font-weight: 900; letter-spacing: 1px; line-height: 1.2; }
+.click-subtext { font-size: 0.7rem; opacity: 0.9; margin-top: 4px; font-weight: 600; }
 
 .float-text {
     position: absolute;
@@ -392,7 +434,6 @@ body {
     to { transform: translateY(-6px); }
 }
 
-/* SCROLLABLE LISTS */
 .scrollable-content {
     overflow-y: auto;
     padding-right: 4px;
@@ -405,7 +446,6 @@ body {
 .scrollable-content::-webkit-scrollbar { width: 5px; }
 .scrollable-content::-webkit-scrollbar-thumb { background: var(--purple-accent); border-radius: 4px; }
 
-/* CARTÕES DE MELHORIAS & EVENTOS */
 .upgrade-card, .event-card {
     background: var(--card-purple-light);
     border: 1px solid rgba(56, 189, 248, 0.2);
@@ -446,7 +486,6 @@ body {
 .btn-buy-action:hover:not(:disabled) { transform: scale(1.04); }
 .btn-buy-action:disabled { opacity: 0.4; cursor: not-allowed; background: #475569; }
 
-/* TABS DE ATIVIDADES */
 .panel-tabs {
     display: flex;
     gap: 8px;
@@ -480,10 +519,8 @@ body {
 /* MODAIS */
 .modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     background: rgba(10, 5, 25, 0.88);
     backdrop-filter: blur(10px);
     z-index: 2000;
@@ -542,7 +579,6 @@ body {
     cursor: pointer;
 }
 
-/* CUTSCENE DIÁLOGOS */
 .cutscene-card { max-width: 600px !important; text-align: left !important; }
 .cutscene-header { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 10px; margin-bottom: 14px; }
 .cutscene-badge { background: var(--purple-accent); color: white; font-size: 0.7rem; padding: 3px 10px; border-radius: 10px; font-weight: bold; }
@@ -561,11 +597,8 @@ body {
 .npc-avatar {
     font-size: 2.2rem;
     background: var(--card-purple-light);
-    width: 55px;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 55px; height: 55px;
+    display: flex; align-items: center; justify-content: center;
     border-radius: 50%;
     border: 2px solid var(--baby-blue);
 }
@@ -589,7 +622,6 @@ body {
 
 .choice-btn:hover { background: var(--baby-blue); color: var(--bg-purple-dark); font-weight: bold; }
 
-/* CONQUISTAS */
 .achieve-summary { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px; }
 .achievement-card {
     background: rgba(255, 255, 255, 0.03);
@@ -607,11 +639,9 @@ body {
 .achieve-info h4 { font-size: 0.82rem; color: var(--text-white); }
 .achieve-info p { font-size: 0.7rem; color: var(--text-muted); }
 
-/* TOAST */
 .achievement-toast {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 20px; right: 20px;
     z-index: 1000;
     background: var(--card-purple);
     border: 2px solid var(--baby-blue);
@@ -627,7 +657,6 @@ body {
 .toast-title { font-size: 0.72rem; color: var(--baby-blue); font-weight: bold; display: block; }
 .toast-desc { font-size: 0.85rem; font-weight: bold; color: white; }
 
-/* RODAPÉ */
 .footer-controls { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 .btn-small {
     background: rgba(26, 12, 54, 0.8);
@@ -643,8 +672,7 @@ body {
 
 .lang-selector-corner {
     position: fixed;
-    bottom: 15px;
-    right: 20px;
+    bottom: 15px; right: 20px;
     z-index: 999;
     background: rgba(26, 12, 54, 0.95);
     border: 1px solid var(--baby-blue);
