@@ -74,7 +74,7 @@
         </div>
     </div>
 
-    <!-- MODAL DA PLACA DE SUBSCRITORES -->
+    <!-- MODAL DA PLACA DE SUBSCRITORES TRADUZIDO SEM ERROS -->
     <div id="plaque-modal" class="modal-overlay hidden">
         <div class="modal-card plaque-card">
             <div class="plaque-frame">
@@ -84,7 +84,7 @@
                 <div class="plaque-desc" id="plaque-category-desc">POR ULTRAPASSAR X SUBSCRITORES</div>
                 <div class="plaque-logo">STREAM AWARDS</div>
             </div>
-            <h2 id="plaque-title-text">🎉 PARABÉNS! GANHASTE UMA PLACA!</h2>
+            <h2 id="plaque-title-text">PARABÉNS! GANHASTE UMA PLACA!</h2>
             <p id="plaque-subtext">A tua comunidade continua a crescer!</p>
             <button class="btn-start" id="close-plaque-btn">✨ Continuar a Transmitir</button>
         </div>
@@ -99,7 +99,7 @@
         </div>
     </div>
 
-    <!-- BARRA DE NAVEGAÇÃO DE LOCAIS (NAV BAR) -->
+    <!-- BARRA DE NAVEGAÇÃO DE LOCAIS -->
     <nav class="location-nav">
         <button class="nav-loc-btn active" id="nav-btn-studio" onclick="switchLocation('studio')">
             🎙️ <span id="nav-label-studio">Estúdio</span>
@@ -151,7 +151,6 @@
 
                     <img src="" alt="Streamer" class="streamer-main-img" id="main-stream-img">
 
-                    <!-- MURAL DE PLACAS NA PAREDE DO ESTÚDIO -->
                     <div class="plaques-wall" id="plaques-wall">
                         <div class="wall-plaque locked" id="wall-plaque-bronze" title="Bronze (1K)">🥉</div>
                         <div class="wall-plaque locked" id="wall-plaque-silver" title="Prata (10K)">🥈</div>
@@ -209,7 +208,7 @@
 
             <div class="tab-content" id="tab-achievements-content">
                 <div class="achieve-summary">
-                    <span id="title-achievements">Progresso Total:</span> 
+                    <span id="title-achievements-progress">Progresso Total:</span> 
                     <strong id="achievements-count">0/10</strong>
                 </div>
                 <div id="achievements-list" class="scrollable-content"></div>
@@ -217,8 +216,15 @@
         </section>
     </main>
 
-    <!-- LOCAL 2: VIDA PESSOAL & LUXOS -->
+    <!-- LOCAL 2: VIDA PESSOAL COM IMAGEM DE CAPA -->
     <main class="game-layout-wide location-section hidden" id="location-life">
+        <div class="location-banner">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80" alt="Personal Life Banner" class="location-banner-img">
+            <div class="banner-overlay">
+                <h2 id="banner-life-title">🏡 Mansão & Estilo de Vida</h2>
+            </div>
+        </div>
+
         <section class="panel-box">
             <h3 class="panel-header-title" id="title-houses">🏠 Casas & Imóveis</h3>
             <div id="houses-list" class="scrollable-content"></div>
@@ -235,17 +241,31 @@
         </section>
     </main>
 
-    <!-- LOCAL 3: LOJA DE MERCHANDISING -->
+    <!-- LOCAL 3: LOJA MERCH COM IMAGEM DE CAPA -->
     <main class="game-layout-wide location-section hidden" id="location-merch">
+        <div class="location-banner span-3-banner">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Merch Shop Banner" class="location-banner-img">
+            <div class="banner-overlay">
+                <h2 id="banner-merch-title">👕 Armazém Oficial de Merchandising</h2>
+            </div>
+        </div>
+
         <section class="panel-box" style="grid-column: span 3;">
             <h3 class="panel-header-title" id="title-merch">👕 Lançar Produtos de Merchandising (€/s)</h3>
-            <p class="tab-subtext" id="subtext-merch">Gasta Euros para criar a tua marca de roupa e acessórios para gerar rendimento passivo!</p>
+            <p class="tab-subtext" id="subtext-merch">Gasta Euros para criar a tua marca de roupa e gerar rendimento passivo!</p>
             <div id="merch-list" class="scrollable-content"></div>
         </section>
     </main>
 
-    <!-- LOCAL 4: AGÊNCIA DE MARKETING -->
+    <!-- LOCAL 4: MARKETING COM IMAGEM DE CAPA -->
     <main class="game-layout-wide location-section hidden" id="location-marketing">
+        <div class="location-banner span-3-banner">
+            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1600&q=80" alt="Marketing Agency Banner" class="location-banner-img">
+            <div class="banner-overlay">
+                <h2 id="banner-marketing-title">📢 Agência de Marketing & Publicidade</h2>
+            </div>
+        </div>
+
         <section class="panel-box" style="grid-column: span 3;">
             <h3 class="panel-header-title" id="title-marketing">📢 Campanhas de Anúncios & Patrocínios</h3>
             <p class="tab-subtext" id="subtext-marketing">Investe em publicidade e parcerias para obter bónus temporários massivos de Views!</p>
@@ -280,7 +300,6 @@
         </select>
     </div>
 
-    <!-- SDK SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
 </body>

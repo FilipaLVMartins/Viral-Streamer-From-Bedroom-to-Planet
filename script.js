@@ -9,7 +9,7 @@ const AVATAR_IMAGES = {
     Outro: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80"
 };
 
-// --- DICIONÁRIO MULTI-IDIOMA COMPLETO (PT / EN) ---
+// --- DICIONÁRIO MULTI-IDIOMA SEM MISTURAS DE TRADUÇÃO (PT / EN) ---
 const i18n = {
     pt: {
         liveBadge: "● AO VIVO",
@@ -39,6 +39,8 @@ const i18n = {
         level: "Nível",
         buyBtnText: "Comprar",
         participateText: "🎬 Participar",
+        joinText: "💬 Participar",
+        totalProgress: "Progresso Total:",
         confirmReset: "Queres mesmo reiniciar todo o teu império de streaming?",
         savedAlert: "Jogo guardado com sucesso!",
         titleStream: "📹 Ecrã de Transmissão",
@@ -79,6 +81,14 @@ const i18n = {
         plaqueGold: "Placa de Ouro",
         plaqueDiamond: "Placa de Diamante",
         plaqueDark: "Placa de Matéria Escura",
+        plaqueUnlockedHeader: "APRESENTADO A",
+        plaqueHeaderTitle: "🎉 PARABÉNS! GANHASTE A",
+        plaqueSubtextText: "A tua comunidade continua a crescer!",
+        plaqueCategoryDesc: "POR ULTRAPASSAR {subs} SUBSCRITORES",
+        plaqueCloseBtn: "✨ Continuar a Transmitir",
+        bannerLife: "🏡 Mansão & Estilo de Vida",
+        bannerMerch: "👕 Armazém Oficial de Merchandising",
+        bannerMarketing: "📢 Agência de Marketing & Publicidade",
         ranks: [
             { title: '📍 Quarto da Mãe' },
             { title: '🏠 Sótão Gamer' },
@@ -87,13 +97,13 @@ const i18n = {
             { title: '🚀 Estação Espacial' }
         ],
         upgrades: [
-            { name: '💻 Teclado Mecânico RGB', desc: '+1 View/clique (Escala por nível)' },
-            { name: '🎙️ Microfone de Lapela', desc: '+1 View/seg (Escala por nível)' },
-            { name: '💡 Ring Light Profissional', desc: '+8 Views/seg (Escala por nível)' },
-            { name: '🎬 Editor de Vídeo Pago', desc: '+45 Views/seg (Escala por nível)' },
-            { name: '🪑 Cadeira Gamer Pro', desc: '+200 Views/seg (Escala por nível)' },
-            { name: '⚡ Patrocínio Energético', desc: '+1.100 Views/seg (Escala por nível)' },
-            { name: '🖥️ Supercomputador RGC', desc: '+6.000 Views/seg (Escala por nível)' }
+            { name: '💻 Teclado Mecânico RGB', desc: '+1 View/clique' },
+            { name: '🎙️ Microfone de Lapela', desc: '+1 View/seg' },
+            { name: '💡 Ring Light Profissional', desc: '+8 Views/seg' },
+            { name: '🎬 Editor de Vídeo Pago', desc: '+45 Views/seg' },
+            { name: '🪑 Cadeira Gamer Pro', desc: '+200 Views/seg' },
+            { name: '⚡ Patrocínio Energético', desc: '+1.100 Views/seg' },
+            { name: '🖥️ Supercomputador RGC', desc: '+6.000 Views/seg' }
         ],
         houses: [
             { name: '🏠 Sótão Gamer', desc: '+10% retenção de subs', cost: 500 },
@@ -102,20 +112,49 @@ const i18n = {
             { name: '🚀 Villa na Estação Espacial', desc: 'Duplica todos os ganhos!', cost: 100000 }
         ],
         cars: [
+            { name: '🚲 Bicicleta Urbana', desc: '+10 Subs em post social', cost: 50 },
+            { name: '🛵 Mota Scooter', desc: '+25 Subs em post social', cost: 120 },
             { name: '🚗 Carro Usado de Cidade', desc: '+50 Subs em post social', cost: 200 },
+            { name: '🏍️ Mota Superbike', desc: '+150 Subs em post social', cost: 600 },
             { name: '🏎️ Coupé Desportivo', desc: '+500 Subs em post social', cost: 1500 },
-            { name: '🏎️ Supercarro Italiano', desc: '+5.000 Subs em post social', cost: 12000 }
+            { name: '🏎️ Supercarro Italiano', desc: '+5.000 Subs em post social', cost: 12000 },
+            { name: '✈️ Avião Ligeiro', desc: '+25.000 Subs em post social', cost: 80000 },
+            { name: '🛩️ Jato Privado VIP', desc: '+100.000 Subs em post social', cost: 350000 }
         ],
         lifestyle: [
-            { name: '☕ Café com Streamer Amigo', desc: 'Ganha +100 subs instantâneos', cost: 50 },
-            { name: '🎬 Jantar VIP de Criadores', desc: 'Ganha +800 subs instantâneos', cost: 300 },
-            { name: '✈️ Viagem de Luxo com Fãs', desc: 'Ganha +4.000 subs instantâneos', cost: 2000 }
+            { name: '☕ Café com Streamer Amigo', desc: 'Encontro descontraído de networking', cost: 50 },
+            { name: '🎬 Jantar VIP de Criadores', desc: 'Jantar exclusivo com grandes nomes', cost: 300 },
+            { name: '✈️ Viagem de Luxo com Fãs', desc: 'Férias inesquecíveis com a comunidade', cost: 2000 }
+        ],
+        socialStories: [
+            {
+                badge: "☕ ENCONTRO SOCIAL", title: "Café com Streamer Amigo",
+                npcName: "Alex Streamer", avatar: "☕", dialogue: "Que bom rever-te! Como vão correndo as tuas transmissões?",
+                choices: [
+                    { text: "🤝 'Vamos trocar dicas e fazer uma mentoria!'", bonusSubs: 120, feedback: "A conversa deu ótimas ideias para o canal!" },
+                    { text: "📸 'Tirar uma foto juntos para o Instagram!'", bonusSubs: 150, feedback: "A foto teve imenso engajamento!" }
+                ]
+            },
+            {
+                badge: "🎬 JANTAR VIP", title: "Jantar de Criadores de Conteúdo",
+                npcName: "Organizador VIP", avatar: "🍽️", dialogue: "Bem-vindo ao jantar exclusivo! Vários influenciadores querem falar contigo.",
+                choices: [
+                    { text: "🥂 'Fazer contactos com os maiores streamers!'", bonusSubs: 800, feedback: "Fizeste grandes parcerias na indústria!" }
+                ]
+            },
+            {
+                badge: "✈️ VIAGEM VIP", title: "Viagem de Luxo com Fãs",
+                npcName: "Comunidade de Fãs", avatar: "✈️", dialogue: "Chegámos ao resort de luxo! Todos os fãs estão entusiasmados!",
+                choices: [
+                    { text: "🎉 'Organizar uma festa em direto para os subs!'", bonusSubs: 4000, feedback: "A viagem virou tendência nas redes!" }
+                ]
+            }
         ],
         merch: [
-            { name: '👕 T-Shirt Oficial do Canal', desc: '+€0.50 / segundo', cost: 100, income: 0.5 },
-            { name: '🧥 Hoodie Gamer Edição Limitada', desc: '+€2.50 / segundo', cost: 500, income: 2.5 },
-            { name: '🧢 Boné Neon Personalizado', desc: '+€10.00 / segundo', cost: 2500, income: 10.0 },
-            { name: '🥤 Bebida Energética Própria', desc: '+€50.00 / segundo', cost: 10000, income: 50.0 }
+            { name: '👕 T-Shirt Oficial do Canal', desc: '+€0.50 / segundo', cost: 100 },
+            { name: '🧥 Hoodie Gamer Edição Limitada', desc: '+€2.50 / segundo', cost: 500 },
+            { name: '🧢 Boné Neon Personalizado', desc: '+€10.00 / segundo', cost: 2500 },
+            { name: '🥤 Bebida Energética Própria', desc: '+€50.00 / segundo', cost: 10000 }
         ],
         marketing: [
             { name: '📢 Impulsionar Vídeo no TikTok', desc: 'Multiplica views 2x por 30s', cost: 50, mult: 2, duration: 30 },
@@ -135,38 +174,7 @@ const i18n = {
                     dialogue: "Boas! Estamos ao vivo para 50k pessoas em simultâneo! Como queres gerir o arranque da partida?",
                     choices: [
                         { text: "🎯 'Vamos jogar focado e mostrar jogadas de alto nível!'", bonusMult: 1.0, feedback: "A comunidade pro adorou a jogada!" },
-                        { text: "😂 'Vamos fazer desafios engraçados e rir muito!'", bonusMult: 1.5, feedback: "O vídeo tornou-se viral em memes!" },
-                        { text: "🔥 'Desafio-te a um duelo direto com castigo!'", bonusMult: 2.0, feedback: "A rivalidade fez o contador de subs explodir!" }
-                    ]
-                }
-            ],
-            con: [
-                {
-                    npcName: "Entrevistador Gaming Con", avatar: "🎙️", badge: "🎟️ ENTREVISTA VIP", title: "Palco Principal da Gaming Con",
-                    dialogue: "Estamos aqui com a nova revelação do streaming! Qual é o segredo por trás do teu sucesso?",
-                    choices: [
-                        { text: "❤️ 'É o apoio diário da minha incrível comunidade.'", bonusMult: 1.2, feedback: "A tua humildade conquistou milhares de fãs!" },
-                        { text: "😎 'É o facto de ser simplesmente o melhor no que faço!'", bonusMult: 1.8, feedback: "A tua confiança gerou enorme falatório!" }
-                    ]
-                }
-            ],
-            tournament: [
-                {
-                    npcName: "Comentador e-Sports", avatar: "🏆", badge: "🎮 TORNEIO NACIONAL", title: "Grande Final do Torneio",
-                    dialogue: "Estamos no momento decisivo! Como queres apresentar esta final para o público?",
-                    choices: [
-                        { text: "⚡ 'Criar hype máximo com música épica!'", bonusMult: 1.6, feedback: "O espetáculo bateu recordes de audiência!" },
-                        { text: "💰 'Duplicar o prémio do vencedor com patrocínios!'", bonusMult: 2.2, feedback: "O torneio virou notícia em jornais de tecnologia!" }
-                    ]
-                }
-            ],
-            giveaway: [
-                {
-                    npcName: "Representante da Marca", avatar: "🎁", badge: "🎉 MEGA SORTEIO", title: "Entrega do PC Gamer",
-                    dialogue: "Chegou a hora de revelar o vencedor! Qual é a dinâmica final que queres aplicar?",
-                    choices: [
-                        { text: "📞 'Ligar em direto para o vencedor surpresa!'", bonusMult: 1.7, feedback: "A emoção do vencedor contagiou o chat!" },
-                        { text: "🧩 'Fazer um jogo de adivinhas para desbloquear!'", bonusMult: 2.5, feedback: "O suspense manteve toda a gente colada ao ecrã!" }
+                        { text: "😂 'Vamos fazer desafios engraçados e rir muito!'", bonusMult: 1.5, feedback: "O vídeo tornou-se viral em memes!" }
                     ]
                 }
             ]
@@ -176,9 +184,7 @@ const i18n = {
                 npcName: "Fã Subscritor #1", avatar: "💬", badge: "💬 INTERAÇÃO COM O CHAT", title: "Pergunta dos Fãs",
                 dialogue: "Oii! Sou teu fã desde o início! Podes dar um conselho para quem quer começar a fazer streams como tu?",
                 choices: [
-                    { text: "🌟 'Começa com o que tens e sê sempre autêntico!'", bonusSubs: 120, money: 15.0, feedback: "O teu conselho inspirou centenas de novos inscritos!" },
-                    { text: "🎧 'Investe tudo num bom microfone e boa iluminação!'", bonusSubs: 80, money: 25.0, feedback: "Dica valiosa elogiada pela comunidade!" },
-                    { text: "🤖 'Sinceramente? Clica no botão vermelho e não penses muito!'", bonusSubs: 200, money: 10.0, feedback: "A tua resposta descontraída virou meme no chat!" }
+                    { text: "🌟 'Começa com o que tens e sê sempre autêntico!'", bonusSubs: 120, money: 15.0, feedback: "O teu conselho inspirou centenas de novos inscritos!" }
                 ]
             }
         ],
@@ -194,12 +200,9 @@ const i18n = {
             { title: 'Tendência Mundial', desc: 'Ativa um evento de Vídeo Viral' },
             { title: 'Streamer do Planeta', desc: 'Chega à fase Estação Espacial' }
         ],
-        chatMessages: [
-            'Manda abraço!', 'QUE JOGADA! 🔥', 'GG!!', 'Subi para patrocinador!', 
-            'Melhor live de sempre ❤', 'Hype total!!', 'Comprei a t-shirt do canal!', 'Que carro incrível!'
-        ],
+        chatMessages: ['Manda abraço!', 'QUE JOGADA! 🔥', 'GG!!', 'Subi para patrocinador!', 'Melhor live de sempre ❤'],
         donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream'],
-        donationMsgs: ['Para o café!', 'Continua o grande trabalho! 🔥', 'Manda um abraço na stream!', 'Top de live!']
+        donationMsgs: ['Para o café!', 'Continua o grande trabalho! 🔥', 'Manda um abraço na stream!']
     },
     en: {
         liveBadge: "● LIVE",
@@ -229,6 +232,8 @@ const i18n = {
         level: "Level",
         buyBtnText: "Buy",
         participateText: "🎬 Join",
+        joinText: "💬 Join",
+        totalProgress: "Total Progress:",
         confirmReset: "Are you sure you want to reset your streaming empire?",
         savedAlert: "Game saved successfully!",
         titleStream: "📹 Stream Screen",
@@ -269,6 +274,14 @@ const i18n = {
         plaqueGold: "Gold Play Button",
         plaqueDiamond: "Diamond Play Button",
         plaqueDark: "Dark Matter Play Button",
+        plaqueUnlockedHeader: "PRESENTED TO",
+        plaqueHeaderTitle: "🎉 CONGRATULATIONS! YOU UNLOCKED THE",
+        plaqueSubtextText: "Your community keeps growing!",
+        plaqueCategoryDesc: "FOR PASSING {subs} SUBSCRIBERS",
+        plaqueCloseBtn: "✨ Keep Streaming",
+        bannerLife: "🏡 Mansion & Lifestyle",
+        bannerMerch: "👕 Official Merchandising Warehouse",
+        bannerMarketing: "📢 Marketing & Advertising Agency",
         ranks: [
             { title: "📍 Mom's Bedroom" },
             { title: '🏠 Gamer Attic' },
@@ -277,13 +290,13 @@ const i18n = {
             { title: '🚀 Space Station' }
         ],
         upgrades: [
-            { name: '💻 RGB Mechanical Keyboard', desc: '+1 View/click (Level scaling)' },
-            { name: '🎙 Lapel Microphone', desc: '+1 View/sec (Level scaling)' },
-            { name: '💡 Pro Ring Light', desc: '+8 Views/sec (Level scaling)' },
-            { name: '🎬 Paid Video Editor', desc: '+45 Views/sec (Level scaling)' },
-            { name: '🪑 Pro Gaming Chair', desc: '+200 Views/sec (Level scaling)' },
-            { name: '⚡ Energy Drink Sponsor', desc: '+1,100 Views/sec (Level scaling)' },
-            { name: '🖥️ RGC Supercomputer', desc: '+6,000 Views/sec (Level scaling)' }
+            { name: '💻 RGB Mechanical Keyboard', desc: '+1 View/click' },
+            { name: '🎙 Lapel Microphone', desc: '+1 View/sec' },
+            { name: '💡 Pro Ring Light', desc: '+8 Views/sec' },
+            { name: '🎬 Paid Video Editor', desc: '+45 Views/sec' },
+            { name: '🪑 Pro Gaming Chair', desc: '+200 Views/sec' },
+            { name: '⚡ Energy Drink Sponsor', desc: '+1,100 Views/sec' },
+            { name: '🖥️ RGC Supercomputer', desc: '+6,000 Views/sec' }
         ],
         houses: [
             { name: '🏠 Gamer Attic', desc: '+10% sub retention', cost: 500 },
@@ -292,20 +305,49 @@ const i18n = {
             { name: '🚀 Space Station Villa', desc: 'Double all earnings!', cost: 100000 }
         ],
         cars: [
+            { name: '🚲 City Bicycle', desc: '+10 Subs on social post', cost: 50 },
+            { name: '🛵 Scooter Motorbike', desc: '+25 Subs on social post', cost: 120 },
             { name: '🚗 Used City Car', desc: '+50 Subs on social post', cost: 200 },
+            { name: '🏍️ Superbike Motorcycle', desc: '+150 Subs on social post', cost: 600 },
             { name: '🏎️ Sports Coupe', desc: '+500 Subs on social post', cost: 1500 },
-            { name: '🏎️ Italian Supercar', desc: '+5,000 Subs on social post', cost: 12000 }
+            { name: '🏎️ Italian Supercar', desc: '+5,000 Subs on social post', cost: 12000 },
+            { name: '✈️ Light Aircraft', desc: '+25,000 Subs on social post', cost: 80000 },
+            { name: '🛩️ Private VIP Jet', desc: '+100,000 Subs on social post', cost: 350000 }
         ],
         lifestyle: [
-            { name: '☕ Coffee with Streamer Friend', desc: 'Gain +100 instant subs', cost: 50 },
-            { name: '🎬 VIP Creator Dinner', desc: 'Gain +800 instant subs', cost: 300 },
-            { name: '✈️ Luxury Trip with Fans', desc: 'Gain +4,000 instant subs', cost: 2000 }
+            { name: '☕ Coffee with Streamer Friend', desc: 'Casual networking meetup', cost: 50 },
+            { name: '🎬 VIP Creator Dinner', desc: 'Exclusive dinner with top creators', cost: 300 },
+            { name: '✈️ Luxury Trip with Fans', desc: 'Unforgettable vacation with community', cost: 2000 }
+        ],
+        socialStories: [
+            {
+                badge: "☕ SOCIAL DATE", title: "Coffee with Streamer Friend",
+                npcName: "Alex Streamer", avatar: "☕", dialogue: "Great to see you! How are your streams going?",
+                choices: [
+                    { text: "🤝 'Let's exchange tips and mentor each other!'", bonusSubs: 120, feedback: "The talk gave great ideas for the channel!" },
+                    { text: "📸 'Take a photo together for Instagram!'", bonusSubs: 150, feedback: "The photo received great engagement!" }
+                ]
+            },
+            {
+                badge: "🎬 VIP DINNER", title: "VIP Creator Dinner",
+                npcName: "VIP Host", avatar: "🍽️", dialogue: "Welcome to the VIP dinner! Many creators want to network with you.",
+                choices: [
+                    { text: "🥂 'Network with top streamers!'", bonusSubs: 800, feedback: "You made great connections in the industry!" }
+                ]
+            },
+            {
+                badge: "✈️ VIP TRIP", title: "Luxury Trip with Fans",
+                npcName: "Fan Community", avatar: "✈️", dialogue: "We arrived at the luxury resort! Everyone is super excited!",
+                choices: [
+                    { text: "🎉 'Host an exclusive live party for subs!'", bonusSubs: 4000, feedback: "The trip trended all over social media!" }
+                ]
+            }
         ],
         merch: [
-            { name: '👕 Official Channel T-Shirt', desc: '+€0.50 / second', cost: 100, income: 0.5 },
-            { name: '🧥 Limited Edition Gamer Hoodie', desc: '+€2.50 / second', cost: 500, income: 2.5 },
-            { name: '🧢 Custom Neon Cap', desc: '+€10.00 / second', cost: 2500, income: 10.0 },
-            { name: '🥤 Branded Energy Drink', desc: '+€50.00 / second', cost: 10000, income: 50.0 }
+            { name: '👕 Official Channel T-Shirt', desc: '+€0.50 / second', cost: 100 },
+            { name: '🧥 Limited Edition Gamer Hoodie', desc: '+€2.50 / second', cost: 500 },
+            { name: '🧢 Custom Neon Cap', desc: '+€10.00 / second', cost: 2500 },
+            { name: '🥤 Branded Energy Drink', desc: '+€50.00 / second', cost: 10000 }
         ],
         marketing: [
             { name: '📢 Boost Video on TikTok', desc: 'Multiply views 2x for 30s', cost: 50, mult: 2, duration: 30 },
@@ -324,39 +366,7 @@ const i18n = {
                     npcName: "Streamer Alex", avatar: "🎧", badge: "🤝 LIVE COLLAB", title: "Joint Stream with Alex",
                     dialogue: "Hey! We are live for 50k people right now! How should we kick off this game?",
                     choices: [
-                        { text: "🎯 'Let's focus and show pro-level gameplay!'", bonusMult: 1.0, feedback: "Pro gamers loved your skills!" },
-                        { text: "😂 'Let's do funny challenges and laugh!'", bonusMult: 1.5, feedback: "The stream clip went viral on social media!" },
-                        { text: "🔥 'I challenge you to a 1v1 duel with punishment!'", bonusMult: 2.0, feedback: "The rivalry exploded the subscriber counter!" }
-                    ]
-                }
-            ],
-            con: [
-                {
-                    npcName: "Gaming Con Host", avatar: "🎙️", badge: "🎟️ VIP INTERVIEW", title: "Gaming Con Stage",
-                    dialogue: "Here we are with the newest streaming star! What is the secret behind your growth?",
-                    choices: [
-                        { text: "❤️ 'Daily hard work and caring about my community.'", bonusMult: 1.2, feedback: "Your humility won thousands of hearts!" },
-                        { text: "😎 'Honestly? I am simply the best at what I do!'", bonusMult: 1.8, feedback: "Your confidence created huge hype!" }
-                    ]
-                }
-            ],
-            tournament: [
-                {
-                    npcName: "e-Sports Caster", avatar: "🏆", badge: "🎮 TOURNAMENT FINALS", title: "Grand Finals",
-                    dialogue: "Decision time! How do you want to present this final?",
-                    choices: [
-                        { text: "⚡ 'Create maximum hype with epic music!'", bonusMult: 1.6, feedback: "Viewership hit record numbers!" },
-                        { text: "💰 'Double the cash prize with sponsors!'", bonusMult: 2.2, feedback: "The tournament made tech news headlines!" }
-                    ]
-                }
-            ],
-            giveaway: [
-                {
-                    npcName: "Sponsor Rep", avatar: "🎁", badge: "🎉 MEGA GIVEAWAY", title: "PC Giveaway",
-                    dialogue: "Time to announce the winner! How should we do it?",
-                    choices: [
-                        { text: "📞 'Call the winner live on stream!'", bonusMult: 1.7, feedback: "The winner reaction touched everyone!" },
-                        { text: "🧩 'A mini quiz game to unlock the winner!'", bonusMult: 2.5, feedback: "Suspense kept everyone glued to the stream!" }
+                        { text: "🎯 'Let's focus and show pro-level gameplay!'", bonusMult: 1.0, feedback: "Pro gamers loved your skills!" }
                     ]
                 }
             ]
@@ -366,9 +376,7 @@ const i18n = {
                 npcName: "Fan Subscriber #1", avatar: "💬", badge: "💬 CHAT INTERACTION", title: "Fan Question",
                 dialogue: "Hi! I love your streams! Any advice for someone who wants to start streaming?",
                 choices: [
-                    { text: "🌟 'Start with what you have and be authentic!'", bonusSubs: 120, money: 15.0, feedback: "Your advice inspired many new subs!" },
-                    { text: "🎧 'Invest in a good microphone and lighting!'", bonusSubs: 80, money: 25.0, feedback: "Great tip praised by the community!" },
-                    { text: "🤖 'Just press the red button and don't overthink!'", bonusSubs: 200, money: 10.0, feedback: "Your chill answer became a chat meme!" }
+                    { text: "🌟 'Start with what you have and be authentic!'", bonusSubs: 120, money: 15.0, feedback: "Your advice inspired many new subs!" }
                 ]
             }
         ],
@@ -384,12 +392,9 @@ const i18n = {
             { title: 'Global Trending', desc: 'Trigger a Viral Video event' },
             { title: 'Planet Streamer', desc: 'Reach Space Station rank' }
         ],
-        chatMessages: [
-            'Shoutout please!', 'WHAT A PLAY! 🔥', 'GG!!', 'Just subscribed!', 
-            'Best stream ever ❤', 'Total Hype!!', 'Bought the merch!', 'Awesome car!!'
-        ],
+        chatMessages: ['Shoutout please!', 'WHAT A PLAY! 🔥', 'GG!!', 'Just subscribed!', 'Best stream ever ❤'],
         donators: ['Nuno_RGC', 'Clara_YT', 'Vítor_Vlog', 'PixelQueen', 'PedroGamer99', 'AnaStream'],
-        donationMsgs: ['Coffee money!', 'Keep up the epic work! 🔥', 'Shoutout on stream please!', 'Best stream!']
+        donationMsgs: ['Coffee money!', 'Keep up the epic work! 🔥', 'Shoutout on stream please!']
     }
 };
 
@@ -421,7 +426,7 @@ let gameState = {
         { id: 'pc', cost: 250000, vpc: 0, vps: 6000, count: 0 }
     ],
     houses: [ { count: 0 }, { count: 0 }, { count: 0 }, { count: 0 } ],
-    cars: [ { count: 0 }, { count: 0 }, { count: 0 } ],
+    cars: [ { count: 0 }, { count: 0 }, { count: 0 }, { count: 0 }, { count: 0 }, { count: 0 }, { count: 0 }, { count: 0 } ],
     lifestyle: [ { count: 0 }, { count: 0 }, { count: 0 } ],
     merch: [ { count: 0 }, { count: 0 }, { count: 0 }, { count: 0 } ],
     events: [
@@ -443,8 +448,6 @@ let gameState = {
         { id: 'planet_rank', icon: '🪐', unlocked: false }
     ]
 };
-
-let viralEventActive = false;
 
 function changeLoginLang(lang) {
     gameState.lang = lang;
@@ -535,7 +538,7 @@ function formatNumber(num) {
     return Math.floor(num).toLocaleString(gameState.lang === 'pt' ? 'pt-PT' : 'en-US');
 }
 
-// --- ESCALA DE EFICIÊNCIA POR NÍVEL ---
+// --- ESCALA DE EFICIÊNCIA ---
 function recalculateStats() {
     let newVpc = 1;
     let newVps = 0;
@@ -543,7 +546,7 @@ function recalculateStats() {
     gameState.upgrades.forEach((up, index) => {
         if (up.count > 0) {
             let count = up.count;
-            let mult = 1 + ((count - 1) * 0.12); // Bónus acumulativo por nível
+            let mult = 1 + ((count - 1) * 0.12);
 
             if (index === 0) {
                 newVpc += Math.floor(count * 1 * mult);
@@ -567,7 +570,7 @@ function recalculateMerchIncome() {
     gameState.moneyPerSecond = totalIncome;
 }
 
-// --- FASES (RANKS) & PLACAS ---
+// --- RANKS & PLACAS ---
 const RANKS_CONFIG = [
     { subs: 0, cam: 'CAM-1', game: 'Pixel Quest 4K' },
     { subs: 100, cam: 'CAM-2', game: 'Super Block Crafter' },
@@ -596,7 +599,6 @@ function updateRankAndAvatar(subs) {
     if (rankIndex === 4) unlockAchievement('planet_rank');
 }
 
-// --- CONTROLO DE NAVEGAÇÃO ENTRE LOCAIS ---
 function switchLocation(locationKey) {
     const subs = Math.floor(Math.sqrt(gameState.totalViews)) + (gameState.bonusSubscribers || 0);
 
@@ -664,7 +666,6 @@ function updateNavigationButtons() {
     }
 }
 
-// --- MURAL DE PLACAS DA PAREDE & MODAL DE PLACAS ---
 function checkPlaques(subs) {
     const t = i18n[gameState.lang];
     const p = gameState.plaquesUnlocked;
@@ -687,14 +688,19 @@ function checkPlaques(subs) {
     checkPlaqueTier('dark', 10000000, t.plaqueDark, '👑');
 }
 
+// CORREÇÃO COMPLETA DO MODAL DA PLACA EM AMBOS OS IDIOMAS
 function triggerPlaqueModal(title, reqSubs, icon) {
     const modal = document.getElementById('plaque-modal');
     if (!modal) return;
+    const t = i18n[gameState.lang];
 
     document.getElementById('modal-plaque-icon').innerText = icon;
+    document.getElementById('modal-plaque-header').innerText = t.plaqueUnlockedHeader;
     document.getElementById('plaque-user-name').innerText = gameState.userProfile.name || 'STREAMER';
-    document.getElementById('plaque-category-desc').innerText = `POR ULTRAPASSAR ${formatNumber(reqSubs)} SUBSCRITORES`;
-    document.getElementById('plaque-title-text').innerText = `🎉 PARABÉNS! GANHASTE A ${title.toUpperCase()}!`;
+    document.getElementById('plaque-category-desc').innerText = t.plaqueCategoryDesc.replace('{subs}', formatNumber(reqSubs));
+    document.getElementById('plaque-title-text').innerText = `${t.plaqueHeaderTitle} ${title.toUpperCase()}!`;
+    document.getElementById('plaque-subtext').innerText = t.plaqueSubtextText;
+    document.getElementById('close-plaque-btn').innerText = t.plaqueCloseBtn;
     
     modal.classList.remove('hidden');
     playAchievementSFX();
@@ -704,7 +710,6 @@ document.getElementById('close-plaque-btn').addEventListener('click', () => {
     document.getElementById('plaque-modal').classList.add('hidden');
 });
 
-// --- CHAT & DONATIVOS ---
 function resetChatForLanguage() {
     const chatContainer = document.getElementById('chat-messages');
     if (chatContainer) {
@@ -769,7 +774,6 @@ setInterval(() => {
     }
 }, 3000);
 
-// --- ATUALIZAÇÃO DA INTERFACE ---
 function updateUI() {
     const t = i18n[gameState.lang];
 
@@ -798,6 +802,7 @@ function updateUI() {
     setTxt('tab-events-btn', t.tabEvents);
     setTxt('tab-achievements-btn', t.tabAchievements);
     setTxt('label-money-title', t.labelMoneyTitle);
+    setTxt('title-achievements-progress', t.totalProgress);
 
     setTxt('title-houses', t.titleHouses);
     setTxt('title-cars', t.titleCars);
@@ -806,6 +811,10 @@ function updateUI() {
     setTxt('subtext-merch', t.subtextMerch);
     setTxt('title-marketing', t.titleMarketing);
     setTxt('subtext-marketing', t.subtextMarketing);
+
+    setTxt('banner-life-title', t.bannerLife);
+    setTxt('banner-merch-title', t.bannerMerch);
+    setTxt('banner-marketing-title', t.bannerMarketing);
 
     setTxt('sound-btn', `${t.sfxBtn} ${gameState.soundEnabled ? t.on : t.off}`);
     setTxt('music-btn', `${t.musicBtn} ${gameState.musicEnabled ? t.on : t.off}`);
@@ -845,7 +854,6 @@ function checkAchievementsAndPlaque(subs) {
     if (subs >= 1000) unlockAchievement('subs_1k');
 }
 
-// --- BOTÃO DE CLIQUE ---
 const clickBtn = document.getElementById('click-btn');
 if (clickBtn) {
     clickBtn.addEventListener('click', (e) => {
@@ -879,7 +887,6 @@ function createFloatText(e, text) {
     setTimeout(() => floatEl.remove(), 800);
 }
 
-// --- CONSTRUÇÃO DE TODAS AS LISTAS VISUAIS ---
 function buildUpgradesDOM() {
     const listEl = document.getElementById('upgrades-list');
     if (!listEl) return;
@@ -891,12 +898,18 @@ function buildUpgradesDOM() {
         const card = document.createElement('div');
         card.className = 'upgrade-card';
 
+        let currentLevel = up.count;
+        let efficiencyMultiplier = 1 + (currentLevel > 0 ? (currentLevel - 1) * 0.12 : 0);
+        let baseValues = [1, 1, 8, 45, 200, 1100, 6000];
+        let currentGains = currentLevel > 0 ? Math.floor(baseValues[index] * currentLevel * efficiencyMultiplier) : 0;
+        let unitText = index === 0 ? 'View/click' : 'Views/sec';
+
         card.innerHTML = `
             <div class="card-header-row">
                 <span class="card-title">${upText.name}</span>
                 <span class="count-tag" id="up-count-${index}">${t.level} ${up.count}</span>
             </div>
-            <span class="card-desc">${upText.desc}</span>
+            <span class="card-desc">${upText.desc} (${currentGains > 0 ? `Atual: +${formatNumber(currentGains)}${unitText}` : 'Nível 0'})</span>
             <div class="card-footer-row">
                 <span class="cost-tag" id="up-cost-${index}">👁️ ${formatNumber(up.cost)}</span>
                 <button class="btn-buy-action" id="up-btn-${index}">${t.buyBtnText}</button>
@@ -930,17 +943,16 @@ function buyUpgrade(index) {
         up.cost = Math.floor(up.cost * 1.25);
         playBuySFX();
         unlockAchievement('upgrade_first');
+        buildUpgradesDOM();
         updateUI();
         saveGame();
     }
 }
 
-// --- CONSTRUÇÃO DE VIDA PESSOAL (CASAS, CARROS, VIDA SOCIAL) ---
 function buildLifeDOM() {
     const housesEl = document.getElementById('houses-list');
     const carsEl = document.getElementById('cars-list');
     const socialEl = document.getElementById('social-list');
-
     const t = i18n[gameState.lang];
 
     if (housesEl) {
@@ -955,7 +967,7 @@ function buildLifeDOM() {
                 </div>
                 <span class="card-desc">${h.desc}</span>
                 <div class="card-footer-row">
-                    <span class="cost-tag" id="house-cost-${idx}">€ ${h.cost}</span>
+                    <span class="cost-tag">€ ${h.cost}</span>
                     <button class="btn-buy-action" id="house-btn-${idx}">${t.buyBtnText}</button>
                 </div>
             `;
@@ -976,7 +988,7 @@ function buildLifeDOM() {
                 </div>
                 <span class="card-desc">${c.desc}</span>
                 <div class="card-footer-row">
-                    <span class="cost-tag" id="car-cost-${idx}">€ ${c.cost}</span>
+                    <span class="cost-tag">€ ${c.cost}</span>
                     <button class="btn-buy-action" id="car-btn-${idx}">${t.buyBtnText}</button>
                 </div>
             `;
@@ -997,11 +1009,11 @@ function buildLifeDOM() {
                 <span class="card-desc">${s.desc}</span>
                 <div class="card-footer-row">
                     <span class="cost-tag">€ ${s.cost}</span>
-                    <button class="btn-buy-action" id="social-btn-${idx}">${t.participateText}</button>
+                    <button class="btn-buy-action" id="social-btn-${idx}">${t.joinText}</button>
                 </div>
             `;
             socialEl.appendChild(card);
-            document.getElementById(`social-btn-${idx}`).onclick = () => buySocial(idx);
+            document.getElementById(`social-btn-${idx}`).onclick = () => launchSocialCutscene(idx);
         });
     }
 }
@@ -1029,35 +1041,68 @@ function buyHouse(idx) {
         gameState.houses[idx].count++;
         playBuySFX();
         updateUI();
+        saveGame();
     }
 }
 
 function buyCar(idx) {
     const c = i18n[gameState.lang].cars[idx];
-    const bonuses = [50, 500, 5000];
+    const bonuses = [10, 25, 50, 150, 500, 5000, 25000, 100000];
     if (gameState.money >= c.cost) {
         gameState.money -= c.cost;
         gameState.cars[idx].count++;
         gameState.bonusSubscribers += bonuses[idx];
         playBuySFX();
-        addNewsItem(`🏎️ Novo carro comprado! +${bonuses[idx]} subs!`);
+        addNewsItem(`🏎️ Veículo adquirido: ${c.name}! +${bonuses[idx]} subs!`);
         updateUI();
+        saveGame();
     }
 }
 
-function buySocial(idx) {
-    const s = i18n[gameState.lang].lifestyle[idx];
-    const bonuses = [100, 800, 4000];
-    if (gameState.money >= s.cost) {
-        gameState.money -= s.cost;
-        gameState.lifestyle[idx].count++;
-        gameState.bonusSubscribers += bonuses[idx];
-        playBuySFX();
-        updateUI();
-    }
+function launchSocialCutscene(idx) {
+    const t = i18n[gameState.lang];
+    const s = t.lifestyle[idx];
+    const stories = t.socialStories;
+    if (!stories || !stories[idx]) return;
+    if (gameState.money < s.cost) return;
+
+    gameState.money -= s.cost;
+    const story = stories[idx];
+
+    const modal = document.getElementById('cutscene-modal');
+    document.getElementById('cut-badge').innerText = story.badge;
+    document.getElementById('cut-title').innerText = story.title;
+    document.getElementById('cut-npc-name').innerText = story.npcName;
+    document.getElementById('cut-npc-avatar').innerText = story.avatar;
+    document.getElementById('cut-dialogue').innerText = `"${story.dialogue}"`;
+
+    const choicesContainer = document.getElementById('cut-choices');
+    choicesContainer.innerHTML = '';
+
+    story.choices.forEach((choice) => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.innerText = choice.text;
+
+        btn.onclick = () => {
+            gameState.bonusSubscribers = (gameState.bonusSubscribers || 0) + choice.bonusSubs;
+            gameState.lifestyle[idx].count++;
+
+            modal.classList.add('hidden');
+            playBuySFX();
+            showAchievementToast(`+${choice.bonusSubs} Subs! ${choice.feedback}`);
+            addNewsItem(`❤️ ${story.title}: +${choice.bonusSubs} subs!`);
+
+            updateUI();
+            saveGame();
+        };
+
+        choicesContainer.appendChild(btn);
+    });
+
+    modal.classList.remove('hidden');
 }
 
-// --- CONSTRUÇÃO DE MERCHANDISING ---
 function buildMerchDOM() {
     const listEl = document.getElementById('merch-list');
     if (!listEl) return;
@@ -1074,7 +1119,7 @@ function buildMerchDOM() {
             </div>
             <span class="card-desc">${m.desc}</span>
             <div class="card-footer-row">
-                <span class="cost-tag" id="merch-cost-${idx}">€ ${m.cost}</span>
+                <span class="cost-tag">€ ${m.cost}</span>
                 <button class="btn-buy-action" id="merch-btn-${idx}">${t.buyBtnText}</button>
             </div>
         `;
@@ -1099,10 +1144,10 @@ function buyMerch(idx) {
         recalculateMerchIncome();
         playBuySFX();
         updateUI();
+        saveGame();
     }
 }
 
-// --- CONSTRUÇÃO DE MARKETING ---
 function buildMarketingDOM() {
     const listEl = document.getElementById('marketing-list');
     if (!listEl) return;
@@ -1150,7 +1195,6 @@ function triggerMarketing(idx) {
     }
 }
 
-// --- EVENTOS DE CUTSCENE ---
 function buildEventsDOM() {
     const listEl = document.getElementById('events-list');
     if (!listEl) return;
@@ -1170,7 +1214,7 @@ function buildEventsDOM() {
             <span class="card-desc">${evText.desc}</span>
             <span class="event-bonus">${t.bonusUpTo} +${formatNumber(ev.baseSubBonus * 2.5)} ${t.subsAbbrev}</span>
             <div class="card-footer-row">
-                <span class="cost-tag" id="ev-cost-${index}">👁️ ${formatNumber(ev.cost)}</span>
+                <span class="cost-tag">👁️ ${formatNumber(ev.cost)}</span>
                 <button class="btn-buy-action" id="ev-btn-${index}">${t.participateText}</button>
             </div>
         `;
@@ -1184,12 +1228,7 @@ function updateEventButtonsState() {
     const t = i18n[gameState.lang];
     gameState.events.forEach((ev, index) => {
         const btn = document.getElementById(`ev-btn-${index}`);
-        const costTag = document.getElementById(`ev-cost-${index}`);
-        const countTag = document.getElementById(`ev-count-${index}`);
-
         if (btn) btn.disabled = gameState.views < ev.cost;
-        if (costTag) costTag.innerText = `👁️ ${formatNumber(ev.cost)}`;
-        if (countTag) countTag.innerText = `x${ev.count}`;
     });
 }
 
@@ -1242,7 +1281,6 @@ function launchCutsceneEvent(index) {
     modal.classList.remove('hidden');
 }
 
-// --- INTERAÇÃO COM FÃS + TEMPORIZADOR (COOLDOWN) ---
 document.getElementById('interact-fans-btn').addEventListener('click', () => {
     const now = Date.now();
     if (now < gameState.interactCooldownEnd) return;
@@ -1269,8 +1307,6 @@ document.getElementById('interact-fans-btn').addEventListener('click', () => {
         btn.onclick = () => {
             gameState.bonusSubscribers = (gameState.bonusSubscribers || 0) + choice.bonusSubs;
             gameState.money = (gameState.money || 0) + choice.money;
-
-            // Inicia o cooldown de 45 segundos
             gameState.interactCooldownEnd = Date.now() + 45000;
 
             modal.classList.add('hidden');
@@ -1302,7 +1338,6 @@ function updateInteractCooldownBtn() {
     }
 }
 
-// --- CONQUISTAS ---
 function unlockAchievement(id) {
     const index = gameState.achievements.findIndex(a => a.id === id);
     if (index !== -1 && !gameState.achievements[index].unlocked) {
@@ -1319,10 +1354,7 @@ function showAchievementToast(title) {
     if (!toast) return;
     document.getElementById('toast-desc').innerText = title;
     toast.classList.remove('hidden');
-
-    setTimeout(() => {
-        toast.classList.add('hidden');
-    }, 3500);
+    setTimeout(() => toast.classList.add('hidden'), 3500);
 }
 
 function renderAchievements() {
@@ -1351,7 +1383,6 @@ function renderAchievements() {
     if (achCount) achCount.innerText = `${unlockedCount}/${gameState.achievements.length}`;
 }
 
-// --- TABS DE EVENTOS / CONQUISTAS ---
 const tabEventsBtn = document.getElementById('tab-events-btn');
 const tabAchievementsBtn = document.getElementById('tab-achievements-btn');
 const tabEventsContent = document.getElementById('tab-events-content');
@@ -1364,7 +1395,6 @@ if (tabEventsBtn && tabAchievementsBtn) {
         tabEventsContent.classList.add('active');
         tabAchievementsContent.classList.remove('active');
     });
-
     tabAchievementsBtn.addEventListener('click', () => {
         tabAchievementsBtn.classList.add('active');
         tabEventsBtn.classList.remove('active');
@@ -1373,22 +1403,18 @@ if (tabEventsBtn && tabAchievementsBtn) {
     });
 }
 
-// --- GAME LOOP AUTOMÁTICO ---
 setInterval(() => {
     if (gameState.viewsPerSecond > 0) {
         let gained = (gameState.viewsPerSecond / 10) * gameState.multiplier;
         gameState.views += gained;
         gameState.totalViews += gained;
     }
-
     if (gameState.moneyPerSecond > 0) {
         gameState.money += (gameState.moneyPerSecond / 10);
     }
-
     updateUI();
 }, 100);
 
-// --- SELEÇÃO DE IDIOMA ---
 const langSelect = document.getElementById('lang-select');
 if (langSelect) {
     langSelect.addEventListener('change', (e) => {
@@ -1408,7 +1434,6 @@ function rebuildAllDOMs() {
     buildMarketingDOM();
 }
 
-// --- FORMULÁRIO INICIAL ---
 const setupModal = document.getElementById('setup-modal');
 const setupForm = document.getElementById('setup-form');
 
@@ -1434,10 +1459,9 @@ document.getElementById('edit-profile-btn').addEventListener('click', () => {
     setupModal.classList.remove('hidden');
 });
 
-// --- SISTEMA DE GUARDAR E CARREGAR ---
 async function saveGame() {
     try {
-        localStorage.setItem('viral_streamer_v8_save', JSON.stringify(gameState));
+        localStorage.setItem('viral_streamer_v10_save', JSON.stringify(gameState));
     } catch (e) {}
 
     const playerName = gameState?.userProfile?.name;
@@ -1451,7 +1475,7 @@ async function saveGame() {
 }
 
 async function loadGame() {
-    const saved = localStorage.getItem('viral_streamer_v8_save');
+    const saved = localStorage.getItem('viral_streamer_v10_save');
     if (saved) {
         try {
             const parsed = JSON.parse(saved);
@@ -1474,7 +1498,6 @@ async function loadGame() {
     updateUI();
 }
 
-// CONTROLOS DE ÁUDIO
 document.getElementById('sound-btn').addEventListener('click', () => {
     gameState.soundEnabled = !gameState.soundEnabled;
     updateUI();
@@ -1486,6 +1509,5 @@ document.getElementById('music-btn').addEventListener('click', () => {
     updateUI();
 });
 
-// INICIALIZAÇÃO
 loadGame();
 startBgMusic();
