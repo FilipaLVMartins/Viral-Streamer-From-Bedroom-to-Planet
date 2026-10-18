@@ -1,6 +1,6 @@
 // --- CONFIGURAÇÃO DO SUPABASE ---
-const SUPABASE_URL = 'https://vsjxpklaqnlqzyyjqfqt.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZzanhwa2xhcW5scXp5eWpxZnF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyMTQzMTksImV4cCI6MjEwNjc5MDMxOX0.gPszq6IVGaSD5SpbKVaoUBYheEwdIVmV7akxeL1lpXU';
+const SUPABASE_URL = 'https://vbwqhhqvvyebebsfldpm.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZid3FoaHF2dnllYmVic2ZsZHBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3MTEzOTYsImV4cCI6MjEwNjI4NzM5Nn0.iBgSTsBZYHdawgFsfMlpb_YNyEVOe-jFvlZkazRzak0';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const AVATAR_IMAGES = {
